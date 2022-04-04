@@ -1,3 +1,4 @@
+import gk_data
 from ui_bind import Ui_windowBind
 from PyQt5 import QtWidgets as QtW
 from PyQt5 import QtCore as QtC
@@ -6,7 +7,7 @@ import gk_gameKey
 
 class BindUI(QtW.QWidget):
     # Signals
-    bind_data_return = QtC.pyqtSignal(str, int)
+    bind_data_return = QtC.pyqtSignal(str, int, int)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +18,9 @@ class BindUI(QtW.QWidget):
         # variables
         self.buttonname = None
         self.currentbind = 0
+        self.currentmode = 0
         self.newbind = 0
+        self.newmode = 0
         self.shifted = False
 
         # Button UI actions
@@ -49,10 +52,17 @@ class BindUI(QtW.QWidget):
         self.ui.bRCtrl.clicked.connect(self.keyoverride)
         self.ui.bRShift.clicked.connect(self.keyoverride)
 
-    def bind_data_in(self, buttontobind, currentkeybind):
+        # Mode sets
+        self.ui.bModeKEYB.clicked.connect(self.modeset)
+        self.ui.bModeGPAD.clicked.connect(self.modeset)
+        self.ui.bModeBOTH.clicked.connect(self.modeset)
+
+    def bind_data_in(self, buttontobind, currentkeybind, currentkeymode):
         self.buttonname = buttontobind
         self.currentbind = currentkeybind
+        self.currentmode = currentkeymode
         self.newbind = currentkeybind
+        self.newmode = currentkeymode
         self.ui.buttonIndicator.setText(str(self.buttonname))
         self.labelupdate()
 
@@ -67,13 +77,13 @@ class BindUI(QtW.QWidget):
 
     def acceptbind(self):
         # Accepts new bindings and returns old bindings to bind_data_return signal
-        print("acceptbind button", self.buttonname, " key", self.newbind)
-        self.bind_data_return.emit(self.buttonname, self.newbind)
+        print("acceptbind button", self.buttonname, " key", self.newbind, " mode", self.newmode)
+        self.bind_data_return.emit(self.buttonname, self.newbind, self.newmode)
         self.close()
 
     def cancelbind(self):
         # Cancels new binding, returns old bindings to bind_data_return signal
-        self.bind_data_return.emit(self.buttonname, self.currentbind)
+        self.bind_data_return.emit(self.buttonname, self.currentbind, self.currentmode)
         print("cancel button", self.buttonname)
         self.close()
 
@@ -84,6 +94,11 @@ class BindUI(QtW.QWidget):
         self.newbind = gk_gameKey.map_txt_to_ard(senderbtn.text())
         self.labelupdate()
         print("special key override", self.newbind)
+
+    def modeset(self):
+        senderbtn = self.sender()
+        self.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[senderbtn.text()]])
+        self.newmode = gk_data.gk_hw_keymode[senderbtn.text()]
 
     def keyPressEvent(self, event):
         # Set shifted status to true when shift is pressed

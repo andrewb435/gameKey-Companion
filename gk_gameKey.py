@@ -95,7 +95,7 @@ class GameKey:
         self.version = None
         self.devicename = None
         self.hwmap = None
-        self.debug = 0
+        self.debug = 1
 
     def init_buttons(self):
         self.buttons.clear()
@@ -179,8 +179,7 @@ class GameKey:
             print('received getbuttons:', line)
         self.init_buttons()   # re-init the buttons to make sure there's no leftovers from prev config
         self.remotebutton = line
-        config = self.remotebutton.split("|")
-        for buttons_data in config.split("|"):
+        for buttons_data in self.remotebutton.split("|"):
             for button_mapping in self.hwmap:
                 button = buttons_data.split("=")
                 if self.hwmap[button_mapping] == int(button[0]):    # Compare button string to dict mapping
@@ -245,7 +244,8 @@ class GameKey:
         bind_cmd = "bind "
         bind_cntr = 0
         for button in self.buttons:
-            binding = self.buttons[button]
+            binding = self.buttons[button].button_bind
+            mode = self.buttons[button].button_mode
             if binding == 0:
                 if unbind_cntr > 0:
                     unbind_cmd += "&" + str(self.hwmap[button])
@@ -254,9 +254,9 @@ class GameKey:
                     unbind_cntr += 1
             else:
                 if bind_cntr > 0:
-                    bind_cmd += "&" + str(self.hwmap[button]) + "=" + str(binding)
+                    bind_cmd += "|" + str(self.hwmap[button]) + "=" + str(binding) + "&" + str(mode)
                 else:
-                    bind_cmd += str(self.hwmap[button]) + "=" + str(binding)
+                    bind_cmd += str(self.hwmap[button]) + "=" + str(binding) + "&" + str(mode)
                     bind_cntr += 1
         self.localunbind = unbind_cmd + "\n"
         self.localbind = bind_cmd + "\n"
@@ -344,7 +344,9 @@ class GameKey:
         return export
 
     def map_json(self, gkconfig_in):
-        self.buttons = gkconfig_in['buttons']
+        for button_name in gkconfig_in['button_binds']:
+            self.buttons[button_name].button_bind = gkconfig_in['button_binds'][button_name]
+            self.buttons[button_name].button_mode = gkconfig_in['button_modes'][button_name]
         for index_str in gkconfig_in['axes']:
             if int(index_str) < 30:  # 30 max HW buttons
                 self.axes[int(index_str)].map_json(gkconfig_in['axes'][index_str])
