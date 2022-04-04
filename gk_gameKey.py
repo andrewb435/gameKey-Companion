@@ -31,6 +31,12 @@ class GkProfileData:
         self.axes = [GkAxis, GkAxis]
 
 
+class GkButton:
+    def __init__(self, bind, mode):
+        self.button_bind = bind
+        self.button_mode = mode
+
+
 class GkAxis:
     def __init__(self):
         self.low = 0
@@ -94,8 +100,8 @@ class GameKey:
     def init_buttons(self):
         self.buttons.clear()
         for item in self.hwmap:
-            if not item[:-1] == "kThumbStick":
-                self.buttons[item] = 0
+            if not item[:-1] == "kThumbStick":      # String compare to eliminate thumbstick from the button arrays
+                self.buttons[item] = GkButton(0, 0)     # init GkButton as blank 0 0
 
     def init_axes(self):
         # clear out the axes and append to HW limit
@@ -173,12 +179,14 @@ class GameKey:
             print('received getbuttons:', line)
         self.init_buttons()   # re-init the buttons to make sure there's no leftovers from prev config
         self.remotebutton = line
-        splitconfig = self.remotebutton.split("&")
-        for configitem in splitconfig:
-            configitem = configitem.split("=")
+        config = self.remotebutton.split("|")
+        for buttons_data in config.split("|"):
             for button_mapping in self.hwmap:
-                if self.hwmap[button_mapping] == int(configitem[0]):
-                    self.buttons[button_mapping] = int(configitem[1])
+                button = buttons_data.split("=")
+                if self.hwmap[button_mapping] == int(button[0]):    # Compare button string to dict mapping
+                    button_data = button[1].split("&")
+                    self.buttons[button_mapping].button_bind = int(button_data[0])
+                    self.buttons[button_mapping].button_mode = int(button_data[1])
                     break
         self.connection.reset_input_buffer()
 

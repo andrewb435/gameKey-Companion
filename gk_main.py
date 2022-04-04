@@ -159,103 +159,103 @@ class MainUI(QtWidgets.QMainWindow):
 
         # Pinky
         self.ui.kPinkyB1.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyB1.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyB1.objectName()].button_bind)
         )
         self.ui.kPinkyB2.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyB2.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyB2.objectName()].button_bind)
         )
         self.ui.kPinkyB3.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyB3.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyB3.objectName()].button_bind)
         )
         self.ui.kPinkyB4.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyB4.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyB4.objectName()].button_bind)
         )
         self.ui.kPinkyB5.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyB5.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyB5.objectName()].button_bind)
         )
         self.ui.kPinkyBAddon.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kPinkyBAddon.objectName()])
+            self.gk_cur.buttons[self.ui.kPinkyBAddon.objectName()].button_bind)
         )
 
         # Ring
         self.ui.kRingB1.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kRingB1.objectName()])
+            self.gk_cur.buttons[self.ui.kRingB1.objectName()].button_bind)
         )
         self.ui.kRingB2.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kRingB2.objectName()])
+            self.gk_cur.buttons[self.ui.kRingB2.objectName()].button_bind)
         )
         self.ui.kRingB3.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kRingB3.objectName()])
+            self.gk_cur.buttons[self.ui.kRingB3.objectName()].button_bind)
         )
         self.ui.kRingB4.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kRingB4.objectName()])
+            self.gk_cur.buttons[self.ui.kRingB4.objectName()].button_bind)
         )
         self.ui.kRingB5.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kRingB5.objectName()])
+            self.gk_cur.buttons[self.ui.kRingB5.objectName()].button_bind)
         )
 
         # Middle
         self.ui.kMiddleB1.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kMiddleB1.objectName()])
+            self.gk_cur.buttons[self.ui.kMiddleB1.objectName()].button_bind)
         )
         self.ui.kMiddleB2.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kMiddleB2.objectName()])
+            self.gk_cur.buttons[self.ui.kMiddleB2.objectName()].button_bind)
         )
         self.ui.kMiddleB3.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kMiddleB3.objectName()])
+            self.gk_cur.buttons[self.ui.kMiddleB3.objectName()].button_bind)
         )
         self.ui.kMiddleB4.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kMiddleB4.objectName()])
+            self.gk_cur.buttons[self.ui.kMiddleB4.objectName()].button_bind)
         )
         self.ui.kMiddleB5.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kMiddleB5.objectName()])
+            self.gk_cur.buttons[self.ui.kMiddleB5.objectName()].button_bind)
         )
 
         # Index
         self.ui.kIndexB1.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexB1.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexB1.objectName()].button_bind)
         )
         self.ui.kIndexB2.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexB2.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexB2.objectName()].button_bind)
         )
         self.ui.kIndexB3.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexB3.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexB3.objectName()].button_bind)
         )
         self.ui.kIndexB4.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexB4.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexB4.objectName()].button_bind)
         )
         self.ui.kIndexB5.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexB5.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexB5.objectName()].button_bind)
         )
         self.ui.kIndexBAddon.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kIndexBAddon.objectName()])
+            self.gk_cur.buttons[self.ui.kIndexBAddon.objectName()].button_bind)
         )
 
         # ThumbNav
         self.ui.kThumbNavN.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbNavN.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbNavN.objectName()].button_bind)
         )
         self.ui.kThumbNavE.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbNavE.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbNavE.objectName()].button_bind)
         )
         self.ui.kThumbNavS.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbNavS.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbNavS.objectName()].button_bind)
         )
         self.ui.kThumbNavW.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbNavW.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbNavW.objectName()].button_bind)
         )
         self.ui.kThumbNavPush.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()].button_bind)
         )
 
         # Thumb Outer Button
         self.ui.kThumbBAddon.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbBAddon.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbBAddon.objectName()].button_bind)
         )
 
         # ThumbStick Button
         self.ui.kThumbStickPush.setText(gk_gameKey.map_ard_to_txt(
-            self.gk_cur.buttons[self.ui.kThumbStickPush.objectName()])
+            self.gk_cur.buttons[self.ui.kThumbStickPush.objectName()].button_bind)
         )
 
         # ThumbStick Axis
