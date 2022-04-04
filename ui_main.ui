@@ -1103,7 +1103,7 @@
       <x>5</x>
       <y>35</y>
       <width>155</width>
-      <height>260</height>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
@@ -1196,7 +1196,7 @@
      <property name="geometry">
       <rect>
        <x>5</x>
-       <y>225</y>
+       <y>185</y>
        <width>145</width>
        <height>30</height>
       </rect>
@@ -1875,6 +1875,54 @@ Up/Down</string>
       <string/>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="lGPADColor">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>260</y>
+      <width>45</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>GPAD</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lKEYBColor">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>45</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>KEYB</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lBOTHColor">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>260</y>
+      <width>45</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>BOTH</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>
