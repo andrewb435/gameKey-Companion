@@ -366,7 +366,7 @@ class MainUI(QtWidgets.QMainWindow):
                     int(self.gk_cur.axes[0].high)
                 )
             )
-            if self.gk_cur.axes[0].invert:
+            if int(self.gk_cur.axes[0].invert) == 1:
                 self.ui.iXInvert.setChecked(True)
             else:
                 self.ui.iXInvert.setChecked(False)
@@ -379,7 +379,7 @@ class MainUI(QtWidgets.QMainWindow):
                     int(self.gk_cur.axes[1].high)
                 )
             )
-            if self.gk_cur.axes[1].invert:
+            if int(self.gk_cur.axes[1].invert) == 1:
                 self.ui.iYInvert.setChecked(True)
             else:
                 self.ui.iYInvert.setChecked(False)
@@ -419,9 +419,9 @@ class MainUI(QtWidgets.QMainWindow):
     def axis_invert(self):
         inputbtn = self.sender()
         if inputbtn.objectName() == "iXInvert":
-            self.gk_cur.axes[0].invert = self.ui.iXInvert.isChecked()
+            self.gk_cur.axes[0].invert = int(self.ui.iXInvert.isChecked())
         elif inputbtn.objectName() == "iYInvert":
-            self.gk_cur.axes[1].invert = self.ui.iYInvert.isChecked()
+            self.gk_cur.axes[1].invert = int(self.ui.iYInvert.isChecked())
 
     def axis_limits_changed(self):
         inputbtn = self.sender()
