@@ -49,6 +49,10 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.bSendAxes.clicked.connect(self.set_axes)
         self.ui.iXInvert.clicked.connect(self.axis_invert)
         self.ui.iYInvert.clicked.connect(self.axis_invert)
+        self.ui.radioXModeAnalog.clicked.connect(self.axis_mode)
+        self.ui.radioXModeDigital.clicked.connect(self.axis_mode)
+        self.ui.radioYModeAnalog.clicked.connect(self.axis_mode)
+        self.ui.radioYModeDigital.clicked.connect(self.axis_mode)
 
         '''
         Button Bind actions
@@ -122,6 +126,12 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.lKEYBColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lKEYBColor.text()]])
         self.ui.lGPADColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lGPADColor.text()]])
         self.ui.lBOTHColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lBOTHColor.text()]])
+
+        # Thumbstick mode color indicators
+        self.ui.radioXModeDigital.setStyleSheet(gk_data.gk_colormode[0])
+        self.ui.radioXModeAnalog.setStyleSheet(gk_data.gk_colormode[1])
+        self.ui.radioYModeDigital.setStyleSheet(gk_data.gk_colormode[0])
+        self.ui.radioYModeAnalog.setStyleSheet(gk_data.gk_colormode[1])
 
     def get_serial(self):
         comports = list(serial.tools.list_ports.comports())
@@ -366,10 +376,16 @@ class MainUI(QtWidgets.QMainWindow):
                     int(self.gk_cur.axes[0].high)
                 )
             )
+            # X Invert
             if int(self.gk_cur.axes[0].invert) == 1:
                 self.ui.iXInvert.setChecked(True)
             else:
                 self.ui.iXInvert.setChecked(False)
+            # X Mode
+            if int(self.gk_cur.axes[0].analog_mode) == 0:
+                self.ui.radioXModeDigital.setChecked(True)
+            else:
+                self.ui.radioXModeAnalog.setChecked(True)
 
             # Y Axis
             self.ui.sliderYrange.setValue(
@@ -379,10 +395,16 @@ class MainUI(QtWidgets.QMainWindow):
                     int(self.gk_cur.axes[1].high)
                 )
             )
+            # Y Invert
             if int(self.gk_cur.axes[1].invert) == 1:
                 self.ui.iYInvert.setChecked(True)
             else:
                 self.ui.iYInvert.setChecked(False)
+            # Y Mode
+            if int(self.gk_cur.axes[1].analog_mode) == 0:
+                self.ui.radioYModeDigital.setChecked(True)
+            else:
+                self.ui.radioYModeAnalog.setChecked(True)
 
             # Deadzone dial
             self.ui.dialXdz.setValue(int(self.gk_cur.axes[0].deadzone))
@@ -422,6 +444,10 @@ class MainUI(QtWidgets.QMainWindow):
             self.gk_cur.axes[0].invert = int(self.ui.iXInvert.isChecked())
         elif inputbtn.objectName() == "iYInvert":
             self.gk_cur.axes[1].invert = int(self.ui.iYInvert.isChecked())
+
+    def axis_mode(self):
+        self.gk_cur.axes[0].analog_mode = int(self.ui.radioXModeAnalog.isChecked())
+        self.gk_cur.axes[1].analog_mode = int(self.ui.radioYModeAnalog.isChecked())
 
     def axis_limits_changed(self):
         inputbtn = self.sender()
