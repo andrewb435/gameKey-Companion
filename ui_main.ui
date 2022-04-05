@@ -1358,32 +1358,6 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QCheckBox" name="iXInvert">
-     <property name="geometry">
-      <rect>
-       <x>35</x>
-       <y>165</y>
-       <width>75</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>X Invert</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="iYInvert">
-     <property name="geometry">
-      <rect>
-       <x>665</x>
-       <y>165</y>
-       <width>75</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Y Invert</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="oYCur">
      <property name="geometry">
       <rect>
@@ -1431,7 +1405,7 @@
     <widget class="QPushButton" name="bResetAxes">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>235</x>
        <y>115</y>
        <width>105</width>
        <height>20</height>
@@ -1447,7 +1421,7 @@
     <widget class="QPushButton" name="bSendAxes">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>235</x>
        <y>90</y>
        <width>105</width>
        <height>20</height>
@@ -1463,7 +1437,7 @@
     <widget class="QPushButton" name="bUpdateAnalog">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>235</x>
        <y>140</y>
        <width>105</width>
        <height>20</height>
@@ -1676,7 +1650,7 @@ Up/Down</string>
     <widget class="QFrame" name="grpThumbStick">
      <property name="geometry">
       <rect>
-       <x>365</x>
+       <x>340</x>
        <y>50</y>
        <width>155</width>
        <height>185</height>
@@ -1846,8 +1820,8 @@ Up/Down</string>
     <widget class="QLabel" name="lThumbOutBAddon">
      <property name="geometry">
       <rect>
-       <x>520</x>
-       <y>135</y>
+       <x>465</x>
+       <y>190</y>
        <width>95</width>
        <height>25</height>
       </rect>
@@ -1862,8 +1836,8 @@ Up/Down</string>
     <widget class="QPushButton" name="kThumbBAddon">
      <property name="geometry">
       <rect>
-       <x>550</x>
-       <y>110</y>
+       <x>495</x>
+       <y>165</y>
        <width>35</width>
        <height>25</height>
       </rect>
@@ -1874,6 +1848,140 @@ Up/Down</string>
      <property name="text">
       <string/>
      </property>
+    </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>125</x>
+       <y>100</y>
+       <width>100</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QRadioButton" name="radioXModeAnalog">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>45</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>X Analog</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioXModeDigital">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>25</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="text">
+       <string>X Keyboard</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="iXInvert">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>5</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>X Invert</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>100</y>
+       <width>100</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QRadioButton" name="radioYModeAnalog">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>45</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Y Analog</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioYModeDigital">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>25</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Y Keyboard</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="iYInvert">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>5</y>
+        <width>90</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Y Invert</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="lGPADColor">
