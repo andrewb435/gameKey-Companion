@@ -19,9 +19,9 @@
   <widget class="QLabel" name="keyBindingIndicator">
    <property name="geometry">
     <rect>
-     <x>9</x>
+     <x>108</x>
      <y>10</y>
-     <width>406</width>
+     <width>175</width>
      <height>60</height>
     </rect>
    </property>
@@ -614,6 +614,108 @@
     <string>RSuper</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="bModeKEYB">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>10</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>28</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>KEYB</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bModeGPAD">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>30</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>28</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>GPAD</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bModeBOTH">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>50</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>28</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>BOTH</string>
+   </property>
+  </widget>
   <zorder>keyBindingIndicator</zorder>
   <zorder>bCancel</zorder>
   <zorder>bAccept</zorder>
@@ -639,6 +741,9 @@
   <zorder>bRCtrl</zorder>
   <zorder>bRAlt</zorder>
   <zorder>bRSuper</zorder>
+  <zorder>bModeKEYB</zorder>
+  <zorder>bModeGPAD</zorder>
+  <zorder>bModeBOTH</zorder>
  </widget>
  <tabstops>
   <tabstop>bClear</tabstop>

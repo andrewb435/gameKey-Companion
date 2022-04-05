@@ -253,3 +253,15 @@ gk_hw_righthand = {
     "kThumbStickW": 103
 }
 
+gk_hw_keymode = {
+    "KEYB": 0,
+    "GPAD": 1,
+    "BOTH": 2
+}
+
+gk_colormode = {
+    # Colors from https://lospec.com/palette-list/ibm-color-blind-safe
+    0: "",
+    1: "background-color: #648FFF",
+    2: "background-color: #FE6100",
+}
