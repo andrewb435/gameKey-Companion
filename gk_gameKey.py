@@ -36,6 +36,16 @@ class GkButton:
         self.button_bind = bind
         self.button_mode = mode
 
+    def map_json(self, gk_buttondata):
+        self.button_bind = gk_buttondata['bind']
+        self.button_mode = gk_buttondata['mode']
+
+    def get_json(self):
+        export_button = {
+            "bind": self.button_bind,
+            "mode": self.button_mode,
+        }
+        return export_button
 
 class GkAxis:
     def __init__(self):
@@ -335,18 +345,16 @@ class GameKey:
             axis.deadzone = 20
 
     def get_json(self):
-        export = {}
-        export_buttons = self.buttons
-        export["buttons"] = export_buttons
-        export["axes"] = {}
+        exportblock = {"buttons": {}, "axes": {}}
+        for button_object in self.buttons:
+            exportblock["buttons"][button_object] = self.buttons[button_object].get_json()
         for axis_index, axis in enumerate(self.axes):
-            export["axes"][str(axis_index)] = axis.get_json()
-        return export
+            exportblock["axes"][str(axis_index)] = axis.get_json()
+        return exportblock
 
     def map_json(self, gkconfig_in):
-        for button_name in gkconfig_in['button_binds']:
-            self.buttons[button_name].button_bind = gkconfig_in['button_binds'][button_name]
-            self.buttons[button_name].button_mode = gkconfig_in['button_modes'][button_name]
+        for button_name in gkconfig_in['buttons']:
+            self.buttons[button_name].map_json(gkconfig_in['buttons'][button_name])
         for index_str in gkconfig_in['axes']:
             if int(index_str) < 30:  # 30 max HW buttons
                 self.axes[int(index_str)].map_json(gkconfig_in['axes'][index_str])
