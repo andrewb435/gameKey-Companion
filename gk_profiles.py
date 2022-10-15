@@ -9,6 +9,7 @@ class GkProfileList:
     def __init__(self):
         self.user_home = str(pathlib.Path.home())
         self.config_path = self.get_config_path()
+        self.check_config_path()
         self.profile_items = []
         self.get_profile_list()
 
@@ -16,7 +17,15 @@ class GkProfileList:
         if platform.system() == 'Linux':
             return "/.local/share/gameKeyCompanion"
         if platform.system() == 'Windows':
-            return "gameKeyCompanion"
+            return "\\AppData\\Local\\gameKeyCompanion"
+
+    def check_config_path(self):
+        path = self.user_home + self.config_path
+        if os.path.exists(path):
+            return
+        else:
+            os.makedirs(path)
+            return
 
     def get_profile_list(self):
         self.profile_items = []

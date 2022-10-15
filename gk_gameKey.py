@@ -47,6 +47,7 @@ class GkButton:
         }
         return export_button
 
+
 class GkAxis:
     def __init__(self):
         self.low = 0
@@ -129,7 +130,7 @@ class GameKey:
         for x in ["vers", "feat", "getname"]:
             cmd = x + "\n"
             self.connection.write(cmd.encode('ascii'))
-            time.sleep(0.010)  # 10ms delay to allow serial to flow
+            time.sleep(0.10)  # 100ms delay to allow serial to flow
             line += self.connection.readline().decode('ascii')
         line = line.splitlines()
         self.version = line[0]
@@ -162,7 +163,7 @@ class GameKey:
         if not self.connection.is_open:
             self.connection.open()
         self.connection.write("devinfo\n".encode('ascii'))
-        time.sleep(0.010)  # 10ms delay to allow serial to flow
+        time.sleep(0.10)  # 100ms delay to allow serial to flow
         if self.connection.in_waiting > 0:
             line = self.connection.readline().decode('ascii').rstrip()
         else:
