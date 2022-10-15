@@ -1,6 +1,10 @@
 # created by virtualenv automatically
 /bin
 /lib
+/dist
+/build
+/venv
 /__pycache__
 /.idea
 pyvenv.cfg
+*.spec
