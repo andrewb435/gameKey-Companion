@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>gameKey Configuration</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon.png</normaloff>../icon.png</iconset>
+  </property>
   <property name="locale">
    <locale language="English" country="UnitedStates"/>
   </property>
