@@ -21,7 +21,11 @@ class BindUI(QtW.QWidget):
         self.currentmode = 0
         self.newbind = 0
         self.newmode = 0
-        self.shifted = False
+        self.mod_shift = False
+        self.mod_control = False
+        self.mod_alt = False
+        self.mod_meta = False
+        self.mod_keypad = False
 
         # Button UI actions
         self.ui.bClear.clicked.connect(self.clearbind)
@@ -100,23 +104,99 @@ class BindUI(QtW.QWidget):
         self.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[senderbtn.text()]])
         self.newmode = gk_data.gk_hw_keymode[senderbtn.text()]
 
-    def keyPressEvent(self, event):
-        # Set shifted status to true when shift is pressed
-        if event.key() == 16777248:
-            self.shifted = True
-        else:
-            keyholder = gk_gameKey.map_qt_to_ard(event.key())
-            if 65 <= keyholder <= 90:
-                if self.shifted:
-                    self.newbind = keyholder
-                else:
-                    self.newbind = keyholder + 32
-            else:
-                self.newbind = keyholder
-        if not event.key() == 16777248:
-            self.labelupdate()
+    def translate_numpad(self, incomingbind):
+        outgoingbind = None
 
-    def keyReleaseEvent(self, event):
-        # Set shifted status to false when shift is released
-        if event.key() == 16777248:
-            self.shifted = False
+        return outgoingbind
+
+    def keyPressEvent(self, event):
+        keyholder = gk_gameKey.map_qt_to_ard(event.key())
+        if not ((event.key() == QtC.Qt.Key_Shift)
+                or (event.key() == QtC.Qt.Key_Control)
+                or (event.key() == QtC.Qt.Key_Alt)):
+            self.getmodifiers(event)
+            if keyholder is not None:
+                if self.mod_keypad:
+                    self.newbind = gk_gameKey.map_numpad_to_ard(keyholder)
+                else:
+                    self.newbind = keyholder
+                self.labelupdate()
+                self.mod_shift = False
+                self.mod_control = False
+                self.mod_alt = False
+                self.mod_meta = False
+                self.mod_keypad = False
+
+    # def keyReleaseEvent(self, event):
+
+    def getmodifiers(self, data):
+        # There has GOT to be a more efficient way to do this
+        # Singleton modifiers
+        if data.modifiers() == QtC.Qt.ShiftModifier:
+            self.mod_shift = True
+        elif data.modifiers() == QtC.Qt.ControlModifier:
+            self.mod_control = True
+        elif data.modifiers() == QtC.Qt.AltModifier:
+            self.mod_alt = True
+        elif data.modifiers() == QtC.Qt.KeypadModifier:
+            self.mod_keypad = True
+        # Double modifiers shift
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier):
+            self.mod_shift = True
+            self.mod_control = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.AltModifier):
+            self.mod_shift = True
+            self.mod_alt = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.KeypadModifier):
+            self.mod_shift = True
+            self.mod_keypad = True
+        # Double modifiers control
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier):
+            self.mod_control = True
+            self.mod_alt = True
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.KeypadModifier):
+            self.mod_control = True
+            self.mod_keypad = True
+        # Double modifiers alt
+        elif data.modifiers() == (QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
+            self.mod_alt = True
+            self.mod_keypad = True
+        # triple modifiers shift
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier | QtC.Qt.AltModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_alt = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier | QtC.Qt.KeypadModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
+            self.mod_shift = True
+            self.mod_alt = True
+            self.mod_keypad = True
+        # triple modifiers control
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_keypad = True
+        # quadruple modifiers
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier
+                                  | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_keypad = True
+
+        # Clear modifiers
+        elif data.modifiers() == QtC.Qt.NoModifier:
+            self.mod_shift = False
+            self.mod_control = False
+            self.mod_alt = False
+            self.mod_meta = False
+            self.mod_keypad = False
+        else:
+            self.mod_shift = False
+            self.mod_control = False
+            self.mod_alt = False
+            self.mod_meta = False
+            self.mod_keypad = False

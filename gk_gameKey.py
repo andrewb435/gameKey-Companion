@@ -18,6 +18,12 @@ def map_qt_to_ard(hex_in):
     return _map_to_data(1, 0, int(hex_in))
 
 
+def map_numpad_to_ard(map_in):
+    for numkey in gk_data.gk_numpadascii:
+        if numkey[1] == map_in:
+            return numkey[0]
+
+
 def _map_to_data(index_in, index_out, map_in):
     # Map arbitrary columns in gk_arduinoascii
     for binding in gk_data.gk_arduinoascii:
