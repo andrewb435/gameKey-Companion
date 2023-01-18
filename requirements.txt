@@ -1,0 +1,9 @@
+packaging==23.0
+Pygments==2.14.0
+PyQt5==5.15.7
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.11.0
+pyserial==3.5
+QtPy==2.3.0
+superqt==0.4.1
+typing_extensions==4.4.0
