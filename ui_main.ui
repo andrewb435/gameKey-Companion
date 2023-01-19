@@ -1193,7 +1193,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Reload</string>
+      <string>Load Cfg</string>
      </property>
     </widget>
     <widget class="QFrame" name="fDevInfo">

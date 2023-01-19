@@ -34,7 +34,7 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.bConfigSave.clicked.connect(self.profile_save)
         self.ui.bConfigLoad.clicked.connect(self.profile_load)
         self.profile_reload()
-        self.ui.configChooser.currentTextChanged.connect(self.profile_load)
+        # self.ui.configChooser.currentTextChanged.connect(self.profile_load) # Load from file on select
         self.ui.bConfigSaveAs.clicked.connect(self.profile_saveas)
 
         # Button UI actions
