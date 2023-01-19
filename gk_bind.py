@@ -140,6 +140,8 @@ class BindUI(QtW.QWidget):
             self.mod_alt = True
         elif data.modifiers() == QtC.Qt.KeypadModifier:
             self.mod_keypad = True
+        elif data.modifiers() == QtC.Qt.MetaModifier:
+            self.mod_meta = True
         # Double modifiers shift
         elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier):
             self.mod_shift = True
@@ -150,6 +152,9 @@ class BindUI(QtW.QWidget):
         elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.KeypadModifier):
             self.mod_shift = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_meta = True
         # Double modifiers control
         elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier):
             self.mod_control = True
@@ -157,10 +162,20 @@ class BindUI(QtW.QWidget):
         elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.KeypadModifier):
             self.mod_control = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.MetaModifier):
+            self.mod_control = True
+            self.mod_meta = True
         # Double modifiers alt
         elif data.modifiers() == (QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
             self.mod_alt = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.AltModifier | QtC.Qt.MetaModifier):
+            self.mod_alt = True
+            self.mod_meta = True
+        # Double modifiers keypad
+        elif data.modifiers() == (QtC.Qt.KeypadModifier | QtC.Qt.MetaModifier):
+            self.mod_keypad = True
+            self.mod_meta = True
         # triple modifiers shift
         elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier | QtC.Qt.AltModifier):
             self.mod_shift = True
@@ -170,15 +185,27 @@ class BindUI(QtW.QWidget):
             self.mod_shift = True
             self.mod_control = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_meta = True
         elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
             self.mod_shift = True
             self.mod_alt = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.AltModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_alt = True
+            self.mod_meta = True
         # triple modifiers control
         elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
             self.mod_control = True
             self.mod_alt = True
             self.mod_keypad = True
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier | QtC.Qt.MetaModifier):
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_meta = True
         # quadruple modifiers
         elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier
                                   | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier):
@@ -186,7 +213,38 @@ class BindUI(QtW.QWidget):
             self.mod_control = True
             self.mod_alt = True
             self.mod_keypad = True
-
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier
+                                  | QtC.Qt.AltModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_meta = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.AltModifier
+                                  | QtC.Qt.KeypadModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_alt = True
+            self.mod_keypad = True
+            self.mod_meta = True
+        elif data.modifiers() == (QtC.Qt.ControlModifier | QtC.Qt.AltModifier
+                                  | QtC.Qt.KeypadModifier | QtC.Qt.MetaModifier):
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_keypad = True
+            self.mod_meta = True
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier
+                                  | QtC.Qt.KeypadModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_keypad = True
+            self.mod_meta = True
+        # all five modifiers
+        elif data.modifiers() == (QtC.Qt.ShiftModifier | QtC.Qt.ControlModifier
+                                  | QtC.Qt.AltModifier | QtC.Qt.KeypadModifier | QtC.Qt.MetaModifier):
+            self.mod_shift = True
+            self.mod_control = True
+            self.mod_alt = True
+            self.mod_keypad = True
+            self.mod_meta = True
         # Clear modifiers
         elif data.modifiers() == QtC.Qt.NoModifier:
             self.mod_shift = False
