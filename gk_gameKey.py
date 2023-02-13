@@ -38,18 +38,27 @@ class GkProfileData:
 
 
 class GkButton:
-    def __init__(self, bind, mode):
-        self.button_bind = bind
+    def __init__(self, binda, bindb, bindc, bindd, mode):
+        self.button_bind_a = binda
+        self.button_bind_b = bindb
+        self.button_bind_c = bindc
+        self.button_bind_d = bindd
         self.button_mode = mode
 
     def map_json(self, gk_buttondata):
-        self.button_bind = gk_buttondata['bind']
+        self.button_bind_a = gk_buttondata['bind_a']
+        self.button_bind_b = gk_buttondata['bind_b']
+        self.button_bind_c = gk_buttondata['bind_c']
+        self.button_bind_d = gk_buttondata['bind_d']
         self.button_mode = gk_buttondata['mode']
 
     def get_json(self):
         export_button = {
-            "bind": self.button_bind,
-            "mode": self.button_mode,
+            "bind_a": self.button_bind_a,
+            "bind_b": self.button_bind_b,
+            "bind_c": self.button_bind_c,
+            "bind_d": self.button_bind_d,
+            "mode": self.button_mode
         }
         return export_button
 
@@ -133,7 +142,7 @@ class GameKey:
         if not self.connection.is_open:
             self.connection.open()
         line = ""
-        for x in ["vers", "feat", "getname"]:
+        for x in ["vers", "feat", "gtna"]:
             cmd = x + "\n"
             self.connection.write(cmd.encode('ascii'))
             time.sleep(0.10)  # 100ms delay to allow serial to flow
@@ -168,7 +177,7 @@ class GameKey:
     def get_device(self):
         if not self.connection.is_open:
             self.connection.open()
-        self.connection.write("devinfo\n".encode('ascii'))
+        self.connection.write("devi\n".encode('ascii'))
         time.sleep(0.10)  # 100ms delay to allow serial to flow
         if self.connection.in_waiting > 0:
             line = self.connection.readline().decode('ascii').rstrip()
@@ -189,11 +198,11 @@ class GameKey:
     def get_buttons(self):
         if not self.connection.is_open:
             self.connection.open()
-        self.connection.write("getbuttons\n".encode('ascii'))
+        self.connection.write("gtbu\n".encode('ascii'))
         time.sleep(0.010)   # 10ms delay to allow serial to flow
         line = self.connection.readline().decode('ascii').rstrip()
         if self.debug:
-            print('received getbuttons:', line)
+            print('received gtbu:', line)
         self.init_buttons()   # re-init the buttons to make sure there's no leftovers from prev config
         self.remotebutton = line
         for buttons_data in self.remotebutton.split("|"):
@@ -201,19 +210,22 @@ class GameKey:
                 button = buttons_data.split("=")
                 if self.hwmap[button_mapping] == int(button[0]):    # Compare button string to dict mapping
                     button_data = button[1].split("&")
-                    self.buttons[button_mapping].button_bind = int(button_data[0])
-                    self.buttons[button_mapping].button_mode = int(button_data[1])
+                    self.buttons[button_mapping].button_bind_a = int(button_data[0])
+                    self.buttons[button_mapping].button_bind_b = int(button_data[1])
+                    self.buttons[button_mapping].button_bind_c = int(button_data[2])
+                    self.buttons[button_mapping].button_bind_d = int(button_data[3])
+                    self.buttons[button_mapping].button_mode = int(button_data[4])
                     break
         self.connection.reset_input_buffer()
 
     def get_axes(self):
         if not self.connection.is_open:
             self.connection.open()
-        self.connection.write("getaxes\n".encode('ascii'))
+        self.connection.write("gtax\n".encode('ascii'))
         time.sleep(0.010)   # 10ms delay to allow serial to flow
         line = self.connection.readline().decode('ascii').rstrip()
         if self.debug:
-            print('received getaxes:', line)
+            print('received gtax:', line)
         self.init_axes()   # re-init the buttons to make sure there's no leftovers from prev config
         self.remoteaxes = line
         splitconfig = self.remoteaxes.split("|")
@@ -237,11 +249,11 @@ class GameKey:
             self.init_axes()
         if not self.connection.is_open:
             self.connection.open()
-        self.connection.write("reporta\n".encode('ascii'))
+        self.connection.write("repa\n".encode('ascii'))
         time.sleep(0.010)   # 10ms delay to allow serial to flow
         line = self.connection.readline().decode('ascii').rstrip()
         if self.debug:
-            print('received reporta:', line)
+            print('received repa:', line)
         splitconfig = line.split("&")
         for axis_num, axis_data in enumerate(splitconfig):
             self.axes[axis_num].rawvalue = int(axis_data)
@@ -309,7 +321,7 @@ class GameKey:
         if not self.connection.is_open:
             self.connection.open()
         for index, axis_cur in enumerate(self.axes):
-            axis_command = "setaxis "
+            axis_command = "stax "
             axis_command += str(index)+"="
             axis_command += str(axis_cur.low) + "&"
             axis_command += str(axis_cur.center) + "&"
@@ -334,7 +346,7 @@ class GameKey:
             self.connection.open()
         print("saving to device memory")
         line = ""
-        self.connection.write("savenv\n".encode('ascii'))
+        self.connection.write("savnv\n".encode('ascii'))
         time.sleep(0.010)  # 10ms delay to allow serial to flow
         while self.connection.in_waiting > 0:
             line += self.connection.readline().decode('ascii', 'ignore')

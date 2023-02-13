@@ -13,7 +13,7 @@ class GkSerial:
     def connect(self):
         self.connection.close()
         self.connection = serial.Serial(self.connectionPort, self.connectionBaud, timeout=1)
-        self.connection.write("deviceinfo\n".encode('ascii'))
+        self.connection.write("devi\n".encode('ascii'))
         time.sleep(0.010)   # 10ms delay to allow serial to flow
         line = self.connection.readline().decode('ascii').rstrip()
         if line == 'gameKey':
@@ -30,7 +30,7 @@ class GkSerial:
             print('Attempting to check device', x.device, ':', x.hwid)
             try:
                 ser = serial.Serial(x.device, self.connectionBaud, timeout=1)
-                ser.write("deviceinfo\n".encode('ascii'))
+                ser.write("devi\n".encode('ascii'))
                 time.sleep(0.010)   # 10ms
                 line = ser.readline().decode('ascii').rstrip()
                 ser.close()
