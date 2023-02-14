@@ -256,4 +256,4 @@ class GameKey:
 
     def update_all_labels(self, active_layer_in):
         for button in self.buttons:
-            self.buttons[button].update_label(button, active_layer_in)
+            self.buttons[button].update_label(active_layer_in)

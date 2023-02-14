@@ -1,8 +1,9 @@
-import gk_data
 from ui_bind import Ui_windowBind
 from PyQt5 import QtWidgets as QtW
 from PyQt5 import QtCore as QtC
 import gk_gameKey
+import gk_data
+import gk_helpers
 
 
 class BindUI(QtW.QWidget):
@@ -17,9 +18,10 @@ class BindUI(QtW.QWidget):
 
         # variables
         self.buttonname = None
-        self.currentbinds = [0, 0, 0, 0]
+        self.layer = None
+        self.currentbind = 0
         self.currentmode = 0
-        self.newbind = [0, 0, 0, 0]
+        self.newbind = 0
         self.newmode = 0
         self.mod_shift = False
         self.mod_control = False
@@ -61,17 +63,29 @@ class BindUI(QtW.QWidget):
         self.ui.bModeGPAD.clicked.connect(self.modeset)
         self.ui.bModeBOTH.clicked.connect(self.modeset)
 
-    def bind_data_in(self, buttontobind, currentkeybinds_in, currentkeymode):
+        # Set up some button details
+        self.ui.bModeKEYB.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["KEYB"]])
+        self.ui.bModeGPAD.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["GPAD"]])
+        self.ui.bModeBOTH.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["BOTH"]])
+        # self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[currentkeymode])
+
+    def bind_data_in(self, buttontobind, currentkeybinds_in, currentkeymode_in, currentlayer_in):
         self.buttonname = buttontobind
-        self.currentbinds = currentkeybinds_in
-        self.currentmode = currentkeymode
+        self.currentbind = currentkeybinds_in
+        self.currentmode = currentkeymode_in
+        self.layer = currentlayer_in
         self.newbind = currentkeybinds_in
-        self.newmode = currentkeymode
+        self.newmode = currentkeymode_in
         self.ui.buttonIndicator.setText(str(self.buttonname))
+        self.layerlabel()
         self.labelupdate()
 
     def labelupdate(self):
-        self.ui.keyBindingIndicator.setText(gk_gameKey.map_ard_to_txt(self.newbind))
+        self.ui.keyBindingIndicator.setText(gk_helpers.map_ard_to_txt(self.newbind))
+
+    def layerlabel(self):
+        self.ui.buttonLayerIndicator.setText("Layer " + str(self.layer))
+        self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.layer])
 
     def clearbind(self):
         # clears current self.newbind and updates label
@@ -95,7 +109,7 @@ class BindUI(QtW.QWidget):
         # Special keys are chosen by button.text(), careful with button naming
         # Converts button.text() to arduino mapping code
         senderbtn = self.sender()
-        self.newbind = gk_gameKey.map_txt_to_ard(senderbtn.text())
+        self.newbind = gk_helpers.map_txt_to_ard(senderbtn.text())
         self.labelupdate()
         print("special key override", self.newbind)
 
@@ -109,14 +123,14 @@ class BindUI(QtW.QWidget):
         return outgoingbind
 
     def keyPressEvent(self, event):
-        keyholder = gk_gameKey.map_qt_to_ard(event.key())
+        keyholder = gk_helpers.map_qt_to_ard(event.key())
         if not ((event.key() == QtC.Qt.Key_Shift)
                 or (event.key() == QtC.Qt.Key_Control)
                 or (event.key() == QtC.Qt.Key_Alt)):
             self.getmodifiers(event)
             if keyholder is not None:
                 if self.mod_keypad:
-                    self.newbind = gk_gameKey.map_numpad_to_ard(keyholder)
+                    self.newbind = gk_helpers.map_numpad_to_ard(keyholder)
                 else:
                     self.newbind = keyholder
                 self.labelupdate()

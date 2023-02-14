@@ -27,6 +27,33 @@ class GkButton:
         self.label_c = label_in_c
         self.label_d = label_in_d
 
+    def get_button_bind(self, activelayer_in):
+        if activelayer_in == 0:
+            return self.button_bind_a
+        if activelayer_in == 1:
+            return self.button_bind_b
+        if activelayer_in == 2:
+            return self.button_bind_c
+        if activelayer_in == 3:
+            return self.button_bind_d
+
+    def set_button_bind(self, bind_in, activelayer_in):
+        if activelayer_in == 0:
+            self.button_bind_a = bind_in
+        if activelayer_in == 1:
+            self.button_bind_b = bind_in
+        if activelayer_in == 2:
+            self.button_bind_c = bind_in
+        if activelayer_in == 3:
+            self.button_bind_d = bind_in
+        self.update_label_singleton()
+
+    def get_button_mode(self):
+        return self.button_mode
+
+    def set_button_mode(self, mode_in):
+        self.button_mode = mode_in
+
     def get_json(self):
         export_button = {
             "bind_a": self.button_bind_a,
@@ -37,14 +64,10 @@ class GkButton:
         }
         return export_button
 
-    def update_label(self, button_name_in, active_layer_in):
+    def update_label(self, active_layer_in):
         fade_offset = 10
-
         if self.label_a is not None:
-            self.label_a.setText(gk_helpers.map_ard_to_txt(self.button_bind_a))
-            self.label_b.setText(gk_helpers.map_ard_to_txt(self.button_bind_b))
-            self.label_c.setText(gk_helpers.map_ard_to_txt(self.button_bind_c))
-            self.label_d.setText(gk_helpers.map_ard_to_txt(self.button_bind_d))
+            self.update_label_singleton()
             if active_layer_in == 0:
                 self.label_a.setStyleSheet(gk_data.gk_layercolor[0])
                 self.label_b.setStyleSheet(gk_data.gk_layercolor[1 + fade_offset])
@@ -66,3 +89,8 @@ class GkButton:
                 self.label_c.setStyleSheet(gk_data.gk_layercolor[2 + fade_offset])
                 self.label_d.setStyleSheet(gk_data.gk_layercolor[3])
 
+    def update_label_singleton(self):
+        self.label_a.setText(gk_helpers.map_ard_to_txt(self.button_bind_a))
+        self.label_b.setText(gk_helpers.map_ard_to_txt(self.button_bind_b))
+        self.label_c.setText(gk_helpers.map_ard_to_txt(self.button_bind_c))
+        self.label_d.setText(gk_helpers.map_ard_to_txt(self.button_bind_d))
