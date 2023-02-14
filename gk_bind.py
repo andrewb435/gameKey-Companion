@@ -131,6 +131,8 @@ class BindUI(QtW.QWidget):
             if keyholder is not None:
                 if self.mod_keypad:
                     self.newbind = gk_helpers.map_numpad_to_ard(keyholder)
+                elif 65 <= keyholder <= 90 and not self.mod_shift:
+                    self.newbind = keyholder + 32
                 else:
                     self.newbind = keyholder
                 self.labelupdate()
