@@ -1,103 +1,17 @@
 import time
+from PyQt5 import QtWidgets
 import gk_data
 from gk_data import gk_hw_commands as hwcommands
 import gk_serial
-
-
-def map_txt_to_ard(name_in):
-    # wrapper for _map_to_data for gk_arduinoascii[][2] (txt) to gk_arduinoascii[][0] (arduino dec)
-    return _map_to_data(2, 0, name_in)
-
-
-def map_ard_to_txt(dec_in):
-    # wrapper for _map_to_data for gk_arduinoascii[][0] (arduino dec) to gk_arduinoascii[][2] (txt)
-    return _map_to_data(0, 2, int(dec_in))
-
-
-def map_qt_to_ard(hex_in):
-    # wrapper for _map_to_data for gk_arduinoascii[][1] (Qt::Key) to gk_arduinoascii[][0] (arduino dec)
-    return _map_to_data(1, 0, int(hex_in))
-
-
-def map_numpad_to_ard(map_in):
-    for numkey in gk_data.gk_numpadascii:
-        if numkey[1] == map_in:
-            return numkey[0]
-
-
-def _map_to_data(index_in, index_out, map_in):
-    # Map arbitrary columns in gk_arduinoascii
-    for binding in gk_data.gk_arduinoascii:
-        if binding[index_in] == map_in:
-            return binding[index_out]
+from gk_gkbutton import GkButton
+from gk_gkaxis import GkAxis
+from gk_uimap import gk_uimap as uimap
 
 
 class GkProfileData:
     def __init__(self):
         self.buttons = {}
         self.axes = [GkAxis, GkAxis]
-
-
-class GkButton:
-    def __init__(self, binda, bindb, bindc, bindd, mode):
-        self.button_bind_a = binda
-        self.button_bind_b = bindb
-        self.button_bind_c = bindc
-        self.button_bind_d = bindd
-        self.button_mode = mode
-
-    def map_json(self, gk_buttondata):
-        self.button_bind_a = gk_buttondata['bind_a']
-        self.button_bind_b = gk_buttondata['bind_b']
-        self.button_bind_c = gk_buttondata['bind_c']
-        self.button_bind_d = gk_buttondata['bind_d']
-        self.button_mode = gk_buttondata['mode']
-
-    def get_json(self):
-        export_button = {
-            "bind_a": self.button_bind_a,
-            "bind_b": self.button_bind_b,
-            "bind_c": self.button_bind_c,
-            "bind_d": self.button_bind_d,
-            "mode": self.button_mode
-        }
-        return export_button
-
-
-class GkAxis:
-    def __init__(self):
-        self.low = 0
-        self.center = 511
-        self.high = 1023
-        self.deadzone = 0
-        self.key_up = 0
-        self.key_down = 0
-        self.analog_mode = 0
-        self.invert = 0
-        self.rawvalue = 0
-
-    def map_json(self, gk_axisdata):
-        self.low = gk_axisdata['low']
-        self.center = gk_axisdata['center']
-        self.high = gk_axisdata['high']
-        self.deadzone = gk_axisdata['deadzone']
-        self.key_up = gk_axisdata['key_up']
-        self.key_down = gk_axisdata['key_down']
-        self.analog_mode = gk_axisdata['analog_mode']
-        self.invert = gk_axisdata['invert']
-
-    def get_json(self):
-        export_axis = {
-            "low": self.low,
-            "center": self.center,
-            "high": self.high,
-            "deadzone": self.deadzone,
-            "key_up": self.key_up,
-            "key_down": self.key_down,
-            "analog_mode": self.analog_mode,
-            "invert": self.invert
-        }
-        return export_axis
 
 
 class GameKey:
@@ -124,7 +38,7 @@ class GameKey:
         self.hwmap = None
         self.debug = 1
 
-        # get data from device if theres a connection
+        # get data from device if there's a connection
         if self.connection:
             self.get_devinfo()
             self.get_config()
@@ -321,9 +235,25 @@ class GameKey:
             exportblock["axes"][str(axis_index)] = axis.get_json()
         return exportblock
 
+    def map_button_labels(self, ui_in):
+        ui = ui_in
+        for button in self.buttons:
+            for index, sublist in enumerate(uimap):
+                if button in sublist:
+                    button_uimap_index = index
+                    break
+            self.buttons[button].label_a = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][1])
+            self.buttons[button].label_b = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][2])
+            self.buttons[button].label_c = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][3])
+            self.buttons[button].label_d = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][4])
+
     def map_json(self, gkconfig_in):
         for button_name in gkconfig_in['buttons']:
             self.buttons[button_name].map_json(gkconfig_in['buttons'][button_name])
         for index_str in gkconfig_in['axes']:
             if int(index_str) < 30:  # 30 max HW buttons
                 self.axes[int(index_str)].map_json(gkconfig_in['axes'][index_str])
+
+    def update_all_labels(self, active_layer_in):
+        for button in self.buttons:
+            self.buttons[button].update_label(button, active_layer_in)

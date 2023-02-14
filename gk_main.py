@@ -3,6 +3,7 @@ from ui_main import Ui_windowMain
 from gk_bind import BindUI
 from PyQt5 import QtWidgets
 import gk_gameKey
+import gk_helpers
 import gk_profiles
 
 # Serial
@@ -27,7 +28,8 @@ class MainUI(QtWidgets.QMainWindow):
         self.bindui = BindUI()
 
         # gk_cur setup
-        self.gk_cur = gk_gameKey.GameKey(-1)
+        self.gk_cur = None
+        self.activeLayer = 0
 
         # label colors
         self.init_colors()
@@ -47,6 +49,13 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.bClearAll.clicked.connect(self.bind_clearall)
         self.ui.bSendAll.clicked.connect(self.set_config)
         self.ui.bSaveEEPROM.clicked.connect(self.save_eeprom)
+
+        # Layer Radio actions
+        self.ui.rLayerA.clicked.connect(self.change_layer)
+        self.ui.rLayerB.clicked.connect(self.change_layer)
+        self.ui.rLayerC.clicked.connect(self.change_layer)
+        self.ui.rLayerD.clicked.connect(self.change_layer)
+        self.currentLayer = 0
 
         '''
         Button Bind actions
@@ -106,6 +115,12 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.lKEYBColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lKEYBColor.text()]])
         self.ui.lGPADColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lGPADColor.text()]])
         self.ui.lBOTHColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lBOTHColor.text()]])
+
+        # Layer Selector
+        self.ui.rLayerA.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.rLayerB.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.rLayerC.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.rLayerD.setStyleSheet(gk_data.gk_layercolor[3])
 
         # Pinky
         # Layer 0 / A
@@ -270,441 +285,22 @@ class MainUI(QtWidgets.QMainWindow):
 
     def get_config(self):
         self.gk_cur.get_config()
-        self.update_labels()
+        self.gk_cur.map_button_labels(self)
+        self.gk_cur.update_all_labels(self.activeLayer)
 
     def devicechange(self):
         if len(gamekeylist) > 0:
             if len(gamekeylist[self.ui.comList.currentIndex()].buttons) > 0:
                 if len(gamekeylist[self.ui.comList.currentIndex()].axes) > 0:
                     self.gk_cur = gamekeylist[self.ui.comList.currentIndex()]
-                    self.update_labels()
-
-    def update_labels(self):
-        # device labels
-        self.ui.lDevName.setText(self.gk_cur.devicename)
-        self.ui.lDevFirmware.setText(self.gk_cur.version)
-
-        try:
-            self.update_labels_pinky()
-            self.update_labels_ring()
-            self.update_labels_middle()
-            self.update_labels_index()
-            self.update_labels_thumbnav()
-
-        except KeyError:
-            print("keyError")
-
-    def update_labels_pinky(self):
-        try:
-            # Pinky Button 1
-            self.ui.lPinkyA1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky1.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyB1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky1.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyC1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky1.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyD1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky1.objectName()].button_bind_d
-            ))
-            # Pinky Button 2
-            self.ui.lPinkyA2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky2.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyB2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky2.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyC2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky2.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyD2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky2.objectName()].button_bind_d
-            ))
-            # Pinky Button 3
-            self.ui.lPinkyA3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky3.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyB3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky3.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyC3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky3.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyD3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky3.objectName()].button_bind_d
-            ))
-            # Pinky Button 4
-            self.ui.lPinkyA4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky4.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyB4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky4.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyC4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky4.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyD4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky4.objectName()].button_bind_d
-            ))
-            # Pinky Button 5
-            self.ui.lPinkyA5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky5.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyB5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky5.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyC5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky5.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyD5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinky5.objectName()].button_bind_d
-            ))
-            # Pinky Button Addon
-            self.ui.lPinkyAAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinkyAddon.objectName()].button_bind_a
-            ))
-            self.ui.lPinkyBAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinkyAddon.objectName()].button_bind_b
-            ))
-            self.ui.lPinkyCAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinkyAddon.objectName()].button_bind_c
-            ))
-            self.ui.lPinkyDAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kPinkyAddon.objectName()].button_bind_d
-            ))
-        except KeyError:
-            print("keyError")
-
-    def update_labels_ring(self):
-        try:
-            # Ring Button 1
-            self.ui.lRingA1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing1.objectName()].button_bind_a
-            ))
-            self.ui.lRingB1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing1.objectName()].button_bind_b
-            ))
-            self.ui.lRingC1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing1.objectName()].button_bind_c
-            ))
-            self.ui.lRingD1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing1.objectName()].button_bind_d
-            ))
-            # Ring Button 2
-            self.ui.lRingA2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing2.objectName()].button_bind_a
-            ))
-            self.ui.lRingB2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing2.objectName()].button_bind_b
-            ))
-            self.ui.lRingC2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing2.objectName()].button_bind_c
-            ))
-            self.ui.lRingD2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing2.objectName()].button_bind_d
-            ))
-            # Ring Button 3
-            self.ui.lRingA3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing3.objectName()].button_bind_a
-            ))
-            self.ui.lRingB3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing3.objectName()].button_bind_b
-            ))
-            self.ui.lRingC3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing3.objectName()].button_bind_c
-            ))
-            self.ui.lRingD3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing3.objectName()].button_bind_d
-            ))
-            # Ring Button 4
-            self.ui.lRingA4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing4.objectName()].button_bind_a
-            ))
-            self.ui.lRingB4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing4.objectName()].button_bind_b
-            ))
-            self.ui.lRingC4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing4.objectName()].button_bind_c
-            ))
-            self.ui.lRingD4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing4.objectName()].button_bind_d
-            ))
-            # Ring Button 5
-            self.ui.lRingA5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing5.objectName()].button_bind_a
-            ))
-            self.ui.lRingB5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing5.objectName()].button_bind_b
-            ))
-            self.ui.lRingC5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing5.objectName()].button_bind_c
-            ))
-            self.ui.lRingD5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kRing5.objectName()].button_bind_d
-            ))
-        except KeyError:
-            print("keyError")
-
-    def update_labels_middle(self):
-        try:
-            # Middle Button 1
-            self.ui.lMiddleA1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle1.objectName()].button_bind_a
-            ))
-            self.ui.lMiddleB1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle1.objectName()].button_bind_b
-            ))
-            self.ui.lMiddleC1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle1.objectName()].button_bind_c
-            ))
-            self.ui.lMiddleD1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle1.objectName()].button_bind_d
-            ))
-            # Middle Button 2
-            self.ui.lMiddleA2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle2.objectName()].button_bind_a
-            ))
-            self.ui.lMiddleB2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle2.objectName()].button_bind_b
-            ))
-            self.ui.lMiddleC2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle2.objectName()].button_bind_c
-            ))
-            self.ui.lMiddleD2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle2.objectName()].button_bind_d
-            ))
-            # Middle Button 3
-            self.ui.lMiddleA3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle3.objectName()].button_bind_a
-            ))
-            self.ui.lMiddleB3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle3.objectName()].button_bind_b
-            ))
-            self.ui.lMiddleC3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle3.objectName()].button_bind_c
-            ))
-            self.ui.lMiddleD3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle3.objectName()].button_bind_d
-            ))
-            # Middle Button 4
-            self.ui.lMiddleA4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle4.objectName()].button_bind_a
-            ))
-            self.ui.lMiddleB4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle4.objectName()].button_bind_b
-            ))
-            self.ui.lMiddleC4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle4.objectName()].button_bind_c
-            ))
-            self.ui.lMiddleD4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle4.objectName()].button_bind_d
-            ))
-            # Middle Button 5
-            self.ui.lMiddleA5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle5.objectName()].button_bind_a
-            ))
-            self.ui.lMiddleB5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle5.objectName()].button_bind_b
-            ))
-            self.ui.lMiddleC5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle5.objectName()].button_bind_c
-            ))
-            self.ui.lMiddleD5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kMiddle5.objectName()].button_bind_d
-            ))
-        except KeyError:
-            print("keyError")
-
-    def update_labels_index(self):
-        try:
-            # Index Button 1
-            self.ui.lIndexA1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex1.objectName()].button_bind_a
-            ))
-            self.ui.lIndexB1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex1.objectName()].button_bind_b
-            ))
-            self.ui.lIndexC1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex1.objectName()].button_bind_c
-            ))
-            self.ui.lIndexD1.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex1.objectName()].button_bind_d
-            ))
-            # Index Button 2
-            self.ui.lIndexA2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex2.objectName()].button_bind_a
-            ))
-            self.ui.lIndexB2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex2.objectName()].button_bind_b
-            ))
-            self.ui.lIndexC2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex2.objectName()].button_bind_c
-            ))
-            self.ui.lIndexD2.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex2.objectName()].button_bind_d
-            ))
-            # Index Button 3
-            self.ui.lIndexA3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex3.objectName()].button_bind_a
-            ))
-            self.ui.lIndexB3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex3.objectName()].button_bind_b
-            ))
-            self.ui.lIndexC3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex3.objectName()].button_bind_c
-            ))
-            self.ui.lIndexD3.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex3.objectName()].button_bind_d
-            ))
-            # Index Button 4
-            self.ui.lIndexA4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex4.objectName()].button_bind_a
-            ))
-            self.ui.lIndexB4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex4.objectName()].button_bind_b
-            ))
-            self.ui.lIndexC4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex4.objectName()].button_bind_c
-            ))
-            self.ui.lIndexD4.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex4.objectName()].button_bind_d
-            ))
-            # Index Button 5
-            self.ui.lIndexA5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex5.objectName()].button_bind_a
-            ))
-            self.ui.lIndexB5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex5.objectName()].button_bind_b
-            ))
-            self.ui.lIndexC5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex5.objectName()].button_bind_c
-            ))
-            self.ui.lIndexD5.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndex5.objectName()].button_bind_d
-            ))
-            # Index Button Addon
-            self.ui.lIndexAAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndexAddon.objectName()].button_bind_a
-            ))
-            self.ui.lIndexBAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndexAddon.objectName()].button_bind_b
-            ))
-            self.ui.lIndexCAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndexAddon.objectName()].button_bind_c
-            ))
-            self.ui.lIndexDAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kIndexAddon.objectName()].button_bind_d
-            ))
-        except KeyError:
-            print("keyError")
-
-    def update_labels_thumbnav(self):
-        try:
-            # Thumb Nav Up
-            self.ui.lThumbNavUpA.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavUp.objectName()].button_bind_a
-            ))
-            self.ui.lThumbNavUpB.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavUp.objectName()].button_bind_b
-            ))
-            self.ui.lThumbNavUpC.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavUp.objectName()].button_bind_c
-            ))
-            self.ui.lThumbNavUpD.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavUp.objectName()].button_bind_d
-            ))
-            # Thumb Nav Fwd
-            self.ui.lThumbNavFwdA.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavFwd.objectName()].button_bind_a
-            ))
-            self.ui.lThumbNavFwdB.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavFwd.objectName()].button_bind_b
-            ))
-            self.ui.lThumbNavFwdC.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavFwd.objectName()].button_bind_c
-            ))
-            self.ui.lThumbNavFwdD.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavFwd.objectName()].button_bind_d
-            ))
-            # Thumb Nav Down
-            self.ui.lThumbNavDownA.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavDown.objectName()].button_bind_a
-            ))
-            self.ui.lThumbNavDownB.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavDown.objectName()].button_bind_b
-            ))
-            self.ui.lThumbNavDownC.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavDown.objectName()].button_bind_c
-            ))
-            self.ui.lThumbNavDownD.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavDown.objectName()].button_bind_d
-            ))
-            # Thumb Nav Back
-            self.ui.lThumbNavBackA.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavBack.objectName()].button_bind_a
-            ))
-            self.ui.lThumbNavBackB.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavBack.objectName()].button_bind_b
-            ))
-            self.ui.lThumbNavBackC.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavBack.objectName()].button_bind_c
-            ))
-            self.ui.lThumbNavBackD.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavBack.objectName()].button_bind_d
-            ))
-            # Thumb Nav Push
-            self.ui.lThumbNavPushA.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()].button_bind_a
-            ))
-            self.ui.lThumbNavPushB.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()].button_bind_b
-            ))
-            self.ui.lThumbNavPushC.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()].button_bind_c
-            ))
-            self.ui.lThumbNavPushD.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbNavPush.objectName()].button_bind_d
-            ))
-        except KeyError:
-            print("keyError")
-
-    def update_labels_thumbmisc(self):
-        try:
-            # Thumb Outer Button
-            self.ui.kThumbBAddon.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbBAddon.objectName()].button_bind)
-            )
-            self.ui.kThumbBAddon.setStyleSheet(
-                gk_data.gk_colormode[self.gk_cur.buttons[self.ui.kThumbBAddon.objectName()].button_mode]
-            )
-
-            # ThumbStick Button
-            self.ui.kThumbStickPush.setText(gk_gameKey.map_ard_to_txt(
-                self.gk_cur.buttons[self.ui.kThumbStickPush.objectName()].button_bind)
-            )
-            self.ui.kThumbStickPush.setStyleSheet(
-                gk_data.gk_colormode[self.gk_cur.buttons[self.ui.kThumbStickPush.objectName()].button_mode]
-            )
-
-            # ThumbStick Axis
-            self.ui.kThumbStickN.setText(gk_gameKey.map_ard_to_txt(self.gk_cur.axes[0].key_up))      # N X+
-            self.ui.kThumbStickS.setText(gk_gameKey.map_ard_to_txt(self.gk_cur.axes[0].key_down))    # S X-
-            self.ui.kThumbStickE.setText(gk_gameKey.map_ard_to_txt(self.gk_cur.axes[1].key_up))      # E Y+
-            self.ui.kThumbStickW.setText(gk_gameKey.map_ard_to_txt(self.gk_cur.axes[1].key_down))    # W Y-
-
-        except KeyError:
-            print("keyError")
 
     def bind_clearall(self):
         self.gk_cur.init_buttons()
         self.gk_cur.reset_axes_limits()
-        self.update_labels()
+        self.gk_cur.update_all_labels()
 
     def set_config(self):
         self.gk_cur.set_buttons()
-        # self.set_axes()
 
     def bind_window(self):
         srcinput = self.sender()
@@ -796,3 +392,15 @@ class MainUI(QtWidgets.QMainWindow):
         file = save_dialog[0] + ".json"
         self.profile_data.save_as(file, self.gk_cur.get_json())
         self.profile_reload()
+
+    def change_layer(self):
+        srcinput = self.sender()
+        if srcinput.objectName() == "rLayerA":
+            self.activeLayer = 0
+        elif srcinput.objectName() == "rLayerB":
+            self.activeLayer = 1
+        elif srcinput.objectName() == "rLayerC":
+            self.activeLayer = 2
+        elif srcinput.objectName() == "rLayerD":
+            self.activeLayer = 3
+        self.gk_cur.update_all_labels(self.activeLayer)

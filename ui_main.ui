@@ -3304,6 +3304,74 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="grpLayerSelect">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>40</y>
+      <width>95</width>
+      <height>115</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Active Layer</string>
+    </property>
+    <widget class="QRadioButton" name="rLayerA">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>75</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Layer A</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rLayerB">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>75</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Layer B</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rLayerC">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>75</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Layer C</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rLayerD">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>75</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Layer D</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <tabstops>
