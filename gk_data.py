@@ -166,7 +166,7 @@ gk_arduinoascii = [
     [217, 16777237, "Down"],
     [218, 16777235, "Up"],
     [220, 0x2F + 0x20000000, "KP_SLASH"],
-    [221, 0x2A + 0x20000000, "KP_ASTERISK"],
+    [221, 0x2A + 0x20000000, "KP_STAR"],
     [222, 0x2D + 0x20000000, "KP_MINUS"],
     [223, 0x2B + 0x20000000, "KP_PLUS"],
     [225, 0x31 + 0x20000000, "KP_1"],
@@ -200,7 +200,7 @@ gk_arduinoascii = [
 
 gk_numpadascii = [
     [220, 47, "KP_Slash"],
-    [221, 42, "KP_ASTERISK"],
+    [221, 42, "KP_STAR"],
     [222, 45, "KP_MINUS"],
     [223, 43, "KP_PLUS"],
     [225, 49, "KP_1"],
