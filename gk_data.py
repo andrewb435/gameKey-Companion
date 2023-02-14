@@ -140,9 +140,9 @@ gk_arduinoascii = [
     [135, 0, "RSuper"],
     [176, 16777220, "Return"],
     [177, 16777216, "Esc"],
-    [178, 16777219, "Backspace"],
+    [178, 16777219, "Backsp"],
     [179, 16777217, "Tab"],
-    [193, 16777252, "CapsLock"],
+    [193, 16777252, "CapsL"],
     [194, 16777264, "F1"],
     [195, 16777265, "F2"],
     [196, 16777266, "F3"],
@@ -192,10 +192,10 @@ gk_arduinoascii = [
     [249, 16777285, "F22"],
     [250, 16777286, "F23"],
     [251, 16777287, "F24"],
-    [252, 0x0, "Layer D"],
-    [253, 0x0, "Layer C"],
-    [254, 0x0, "Layer B"],
-    [255, 0x0, "Layer A"]
+    [252, 0x0, "LayerD"],
+    [253, 0x0, "LayerC"],
+    [254, 0x0, "LayerB"],
+    [255, 0x0, "LayerA"]
 ]
 
 gk_numpadascii = [
@@ -291,16 +291,35 @@ gk_hw_righthand = {
 }
 
 gk_hw_keymode = {
-    "KEYB": 0,
-    "GPAD": 1,
-    "BOTH": 2
+    "KEYB": 1,
+    "GPAD": 2,
+    "BOTH": 3,
+    "LAYER": 4
+}
+
+gk_hw_commands = {
+    "ReportAxesValues": "repa",
+    "DeviceInfo": "devi",
+    "Bind": "bind",
+    "SetConfigMode": "conf",
+    "SetDebugMode": "de",
+    "SuperDebugMode": "sde",
+    "Version": "vers",
+    "SaveEEPROM": "savnv",
+    "FeatureFlag": "feat",
+    "GetDeviceName": "gtna",
+    "ReportButtonConfig": "gtbu",
+    "ReportAxesConfig": "gtax",
+    "SetDeviceName": "stna",
+    "SetAxisConfig": "stax"
 }
 
 gk_colormode = {
     # Colors from https://lospec.com/palette-list/ibm-color-blind-safe
-    0: "",
-    1: "background-color: #648FFF",
-    2: "background-color: #FE6100",
+    1: "",
+    2: "background-color: #648FFF",
+    3: "background-color: #FE6100",
+    4: ""
 }
 
 gk_layercolor = {

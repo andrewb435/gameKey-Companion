@@ -5,40 +5,34 @@ import time
 
 class GkSerial:
     def __init__(self, portname_in):
-        self.connection = serial.Serial()
-        self.connectionState = 0
         self.connectionPort = portname_in
         self.connectionBaud = 115200
+        try:
+            self.connection = serial.Serial(self.connectionPort, self.connectionBaud, timeout=1)
+        except serial.SerialException as e:
+            self.connection = None
+            print(e)
 
-    def connect(self):
-        self.connection.close()
-        self.connection = serial.Serial(self.connectionPort, self.connectionBaud, timeout=1)
-        self.connection.write("devi\n".encode('ascii'))
-        time.sleep(0.010)   # 10ms delay to allow serial to flow
-        line = self.connection.readline().decode('ascii').rstrip()
-        if line == 'gameKey':
-            print('gameKey connected on port', self.connectionPort)
-            self.connectionPort = 1
-            return self.connectionPort
-        else:
-            print('gameKey connection failure on port', self.connectionPort)
-            return None
-
-    def scangk(self):
-        comports = list(serial.tools.list_ports.comports())
-        for x in comports:
-            print('Attempting to check device', x.device, ':', x.hwid)
+    def open(self):
+        if not self.connection.is_open:
             try:
-                ser = serial.Serial(x.device, self.connectionBaud, timeout=1)
-                ser.write("devi\n".encode('ascii'))
-                time.sleep(0.010)   # 10ms
-                line = ser.readline().decode('ascii').rstrip()
-                ser.close()
-                if line == 'gameKey':
-                    print('gameKey detected on port', x.device)
-                    fdeviceport = x.device
-                    return fdeviceport
-                else:
-                    print('no device detected on', x.device)
+                self.connection.open()
             except serial.SerialException as e:
                 print(e)
+
+    def commandsend(self, command_in):
+        command_in = command_in + "\n"
+        if self.connection:
+            if not self.connection.is_open:
+                self.open()
+            if self.connection.is_open:
+                self.connection.write(command_in.encode('ascii'))
+                line = []
+                time.sleep(0.025)   # 25ms delay to allow serial to flow
+                while self.connection.in_waiting > 0:
+                    line.append(self.connection.readline().decode('ascii').rstrip())
+                self.connection.reset_input_buffer()
+                if line:
+                    return line
+        else:
+            return None

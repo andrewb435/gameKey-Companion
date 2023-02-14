@@ -106,7 +106,6 @@ class BindUI(QtW.QWidget):
 
     def translate_numpad(self, incomingbind):
         outgoingbind = None
-
         return outgoingbind
 
     def keyPressEvent(self, event):

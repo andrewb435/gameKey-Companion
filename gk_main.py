@@ -1,3 +1,4 @@
+import gk_serial
 from ui_main import Ui_windowMain
 from gk_bind import BindUI
 from PyQt5 import QtWidgets
@@ -254,15 +255,18 @@ class MainUI(QtWidgets.QMainWindow):
             gamekeylist.clear()
             counter = 0
             for x in comports:
-                # Check the comport for a device responding with "gameKey"
-                gamekeylist.append(gk_gameKey.GameKey(x.device))
-                if gamekeylist[counter].get_device():
-                    gamekeylist[counter].get_devinfo()
-                    gamekeylist[counter].get_config()
+                print("Trying device " + x.device)
+                device = gk_serial.GkSerial(x.device)
+                cmd = gk_data.gk_hw_commands["DeviceInfo"]
+                result = device.commandsend(cmd)
+                if result:
+                    result = result[0]
+                if result == "gameKey":
+                    print("gameKey found at " + x.device)
+                    gamekeylist.append(gk_gameKey.GameKey(x.device))
                     self.ui.comList.addItem(x.device)
-                    counter += 1
                 else:
-                    del gamekeylist[counter]
+                    print("Device " + x.device + " did not respond correctly, \"" + str(result) + "\"")
 
     def get_config(self):
         self.gk_cur.get_config()
