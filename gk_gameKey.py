@@ -127,7 +127,7 @@ class GameKey:
         self.buttons.clear()
         for item in self.hwmap:
             if not item[:-1] == "kThumbStick":      # String compare to eliminate thumbstick from the button arrays
-                self.buttons[item] = GkButton(0, 0)     # init GkButton as blank 0 0
+                self.buttons[item] = GkButton(0, 0, 0, 0, 0)     # init GkButton as blank 0 0
 
     def init_axes(self):
         # clear out the axes and append to HW limit

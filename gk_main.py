@@ -704,29 +704,32 @@ class MainUI(QtWidgets.QMainWindow):
 
     def bind_window(self):
         srcinput = self.sender()
-        currentkeybind = 0
+        currentkeybinds = [0, 0, 0, 0]
         currentkeymode = 0
         try:
-            currentkeybind = self.gk_cur.buttons[srcinput.objectName()].button_bind
+            currentkeybinds[0] = self.gk_cur.buttons[srcinput.objectName()].button_bind_a
+            currentkeybinds[1] = self.gk_cur.buttons[srcinput.objectName()].button_bind_b
+            currentkeybinds[2] = self.gk_cur.buttons[srcinput.objectName()].button_bind_c
+            currentkeybinds[3] = self.gk_cur.buttons[srcinput.objectName()].button_bind_d
             currentkeymode = self.gk_cur.buttons[srcinput.objectName()].button_mode
         except KeyError:
             if srcinput.objectName() == 'kThumbStickN':
-                currentkeybind = self.gk_cur.axes[0].key_up
+                currentkeybinds[0] = self.gk_cur.axes[0].key_up
             elif srcinput.objectName() == 'kThumbStickS':
-                currentkeybind = self.gk_cur.axes[0].key_down
+                currentkeybinds[0] = self.gk_cur.axes[0].key_down
             if srcinput.objectName() == 'kThumbStickE':
-                currentkeybind = self.gk_cur.axes[1].key_up
+                currentkeybinds[0] = self.gk_cur.axes[1].key_up
             elif srcinput.objectName() == 'kThumbStickW':
-                currentkeybind = self.gk_cur.axes[1].key_down
+                currentkeybinds[0] = self.gk_cur.axes[1].key_down
 
         # Set up some button details
         self.bindui.ui.bModeKEYB.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["KEYB"]])
         self.bindui.ui.bModeGPAD.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["GPAD"]])
         self.bindui.ui.bModeBOTH.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["BOTH"]])
-        self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[currentkeymode])
+        # self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[currentkeymode])
 
         self.bindui.bind_data_return.connect(self.set_bind)
-        self.bindui.bind_data_in(srcinput.objectName(), currentkeybind, currentkeymode)
+        self.bindui.bind_data_in(srcinput.objectName(), currentkeybinds, currentkeymode)
         self.bindui.show()
 
     def set_bind(self, newbutton, newkeybind, newkeymode):

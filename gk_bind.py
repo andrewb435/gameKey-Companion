@@ -17,9 +17,9 @@ class BindUI(QtW.QWidget):
 
         # variables
         self.buttonname = None
-        self.currentbind = 0
+        self.currentbinds = [0, 0, 0, 0]
         self.currentmode = 0
-        self.newbind = 0
+        self.newbind = [0, 0, 0, 0]
         self.newmode = 0
         self.mod_shift = False
         self.mod_control = False
@@ -61,11 +61,11 @@ class BindUI(QtW.QWidget):
         self.ui.bModeGPAD.clicked.connect(self.modeset)
         self.ui.bModeBOTH.clicked.connect(self.modeset)
 
-    def bind_data_in(self, buttontobind, currentkeybind, currentkeymode):
+    def bind_data_in(self, buttontobind, currentkeybinds_in, currentkeymode):
         self.buttonname = buttontobind
-        self.currentbind = currentkeybind
+        self.currentbinds = currentkeybinds_in
         self.currentmode = currentkeymode
-        self.newbind = currentkeybind
+        self.newbind = currentkeybinds_in
         self.newmode = currentkeymode
         self.ui.buttonIndicator.setText(str(self.buttonname))
         self.labelupdate()
