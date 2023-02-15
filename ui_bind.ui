@@ -136,8 +136,8 @@
     <rect>
      <x>10</x>
      <y>5</y>
-     <width>64</width>
-     <height>16</height>
+     <width>100</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
@@ -614,44 +614,10 @@
     <string>RSuper</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="bModeKEYB">
+  <widget class="QPushButton" name="bShiftLayerA">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>10</y>
-     <width>60</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>28</width>
-     <height>20</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>16777215</height>
-    </size>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="text">
-    <string>KEYB</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="bModeGPAD">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
+     <x>290</x>
      <y>30</y>
      <width>60</width>
      <height>20</height>
@@ -679,10 +645,44 @@
     <enum>Qt::NoFocus</enum>
    </property>
    <property name="text">
-    <string>GPAD</string>
+    <string>LayerA</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="bModeBOTH">
+  <widget class="QPushButton" name="bShiftLayerB">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>50</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>28</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>LayerB</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bShiftLayerD">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -713,20 +713,78 @@
     <enum>Qt::NoFocus</enum>
    </property>
    <property name="text">
-    <string>BOTH</string>
+    <string>LayerD</string>
    </property>
   </widget>
   <widget class="QLabel" name="buttonLayerIndicator">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
-     <width>64</width>
-     <height>16</height>
+     <y>40</y>
+     <width>75</width>
+     <height>25</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>layer#</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bShiftLayerC">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>30</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>28</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>LayerC</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lShiftLayerSelectors">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>10</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Layer Shift Keys</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <zorder>keyBindingIndicator</zorder>
@@ -754,10 +812,12 @@
   <zorder>bRCtrl</zorder>
   <zorder>bRAlt</zorder>
   <zorder>bRSuper</zorder>
-  <zorder>bModeKEYB</zorder>
-  <zorder>bModeGPAD</zorder>
-  <zorder>bModeBOTH</zorder>
+  <zorder>bShiftLayerA</zorder>
+  <zorder>bShiftLayerB</zorder>
+  <zorder>bShiftLayerD</zorder>
   <zorder>buttonLayerIndicator</zorder>
+  <zorder>bShiftLayerC</zorder>
+  <zorder>lShiftLayerSelectors</zorder>
  </widget>
  <tabstops>
   <tabstop>bClear</tabstop>

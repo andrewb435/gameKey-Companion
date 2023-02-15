@@ -26,11 +26,11 @@ gk_uimap = [
     ["kThumbNavDown", "lThumbNavDownA", "lThumbNavDownB", "lThumbNavDownC", "lThumbNavDownD"],
     ["kThumbNavBack", "lThumbNavBackA", "lThumbNavBackB", "lThumbNavBackC", "lThumbNavBackD"],
     ["kThumbNavPush", "lThumbNavPushA", "lThumbNavPushB", "lThumbNavPushC", "lThumbNavPushD"],
-    ["kThumbStickN", "lThumbStickStickNA", "lThumbStickStickNB", "lThumbStickStickNC", "lThumbStickStickND"],
-    ["kThumbStickE", "lThumbStickEA", "lThumbStickEB", "lThumbStickEC", "lThumbStickED"],
-    ["kThumbStickS", "lThumbStickSA", "lThumbStickSB", "lThumbStickSC", "lThumbStickSD"],
-    ["kThumbStickW", "lThumbStickWA", "lThumbStickWB", "lThumbStickWC", "lThumbStickWD"],
+    ["kThumbStickUp", "kThumbStickStickUp", "kThumbStickStickUp", "kThumbStickStickUp", "kThumbStickStickUp"],
+    ["kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd"],
+    ["kThumbStickDown", "kThumbStickDown", "kThumbStickDown", "kThumbStickDown", "kThumbStickDown"],
+    ["kThumbStickBack", "kThumbStickBack", "kThumbStickBack", "kThumbStickBack", "kThumbStickBack"],
     ["kThumbAddon", "lThumbAddonA", "lThumbAddonB", "lThumbAddonC", "lThumbAddonD"],
-    ["kThumbStickPush", "lThumbStickPushA", "lThumbStickPushB", "lThumbStickPushC", "lThumbStickPushD"],
+    ["kThumbStickPush", "kThumbStickPush", "kThumbStickPush", "kThumbStickPush", "kThumbStickPush"],
     ["None", "None", "None", "None", "None"]
 ]

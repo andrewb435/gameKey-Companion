@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>985</width>
+    <width>987</width>
     <height>545</height>
    </rect>
   </property>
@@ -89,7 +89,7 @@
      <string>Retrieve Config</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="grpConfig">
+   <widget class="QGroupBox" name="grpGkConfig">
     <property name="geometry">
      <rect>
       <x>5</x>
@@ -144,7 +144,7 @@
       </font>
      </property>
      <property name="text">
-      <string>SaveAs</string>
+      <string>Save As</string>
      </property>
     </widget>
     <widget class="QPushButton" name="bConfigRefresh">
@@ -332,37 +332,24 @@
     <property name="title">
      <string>Analog Stick</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <widget class="QFrame" name="grpThumbStick">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>0</x>
        <y>20</y>
-       <width>155</width>
+       <width>181</width>
        <height>161</height>
       </rect>
      </property>
-     <widget class="QLabel" name="lThumbStickPush">
+     <widget class="QPushButton" name="kThumbStickBack">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>90</y>
-        <width>55</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Push</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="kThumbStickW">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
+        <x>10</x>
         <y>65</y>
-        <width>35</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -373,28 +360,12 @@
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="kThumbStickPush">
+     <widget class="QLabel" name="lThumbStickFwd">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>65</y>
-        <width>35</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lThumbStickE">
-      <property name="geometry">
-       <rect>
-        <x>90</x>
+        <x>110</x>
         <y>90</y>
-        <width>55</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -405,12 +376,12 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="kThumbStickS">
+     <widget class="QPushButton" name="kThumbStickDown">
       <property name="geometry">
        <rect>
         <x>60</x>
         <y>115</y>
-        <width>35</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -421,12 +392,12 @@
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="lThumbStickS">
+     <widget class="QLabel" name="lThumbStickDown">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>60</x>
         <y>140</y>
-        <width>55</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -437,12 +408,12 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="lThumbStickN">
+     <widget class="QLabel" name="lThumbStickUp">
       <property name="geometry">
        <rect>
-        <x>50</x>
+        <x>60</x>
         <y>5</y>
-        <width>55</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -453,12 +424,12 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="kThumbStickE">
+     <widget class="QPushButton" name="kThumbStickFwd">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>110</x>
         <y>65</y>
-        <width>35</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -469,12 +440,12 @@
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="lThumbStickW">
+     <widget class="QLabel" name="lThumbStickBack">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>90</y>
-        <width>55</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -485,12 +456,12 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="kThumbStickN">
+     <widget class="QPushButton" name="kThumbStickUp">
       <property name="geometry">
        <rect>
         <x>60</x>
         <y>30</y>
-        <width>35</width>
+        <width>50</width>
         <height>25</height>
        </rect>
       </property>
@@ -505,8 +476,8 @@
     <widget class="QFrame" name="grpThumbAddon">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>70</y>
+       <x>175</x>
+       <y>110</y>
        <width>110</width>
        <height>76</height>
       </rect>
@@ -601,6 +572,38 @@
       </property>
      </widget>
     </widget>
+    <widget class="QPushButton" name="kThumbStickPush">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>85</y>
+       <width>50</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lThumbStickPush">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>110</y>
+       <width>50</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Push</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="grpFingers">
     <property name="geometry">
@@ -623,7 +626,7 @@
        <x>140</x>
        <y>5</y>
        <width>110</width>
-       <height>535</height>
+       <height>455</height>
       </rect>
      </property>
      <property name="title">
@@ -639,7 +642,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>370</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -738,7 +741,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>370</y>
+        <y>290</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -837,7 +840,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>290</y>
+        <y>210</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -936,7 +939,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>210</y>
+        <y>130</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1035,7 +1038,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>130</y>
+        <y>50</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1137,7 +1140,7 @@
        <x>270</x>
        <y>5</y>
        <width>110</width>
-       <height>535</height>
+       <height>455</height>
       </rect>
      </property>
      <property name="title">
@@ -1153,7 +1156,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>450</y>
+        <y>370</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1252,7 +1255,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>370</y>
+        <y>290</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1351,7 +1354,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>290</y>
+        <y>210</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1450,7 +1453,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>210</y>
+        <y>130</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -1549,7 +1552,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>130</y>
+        <y>50</y>
         <width>90</width>
         <height>76</height>
        </rect>
@@ -2927,6 +2930,103 @@
       </widget>
      </widget>
     </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>460</y>
+       <width>241</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QRadioButton" name="rLayerA">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Layer A</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rLayerB">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Layer B</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rLayerC">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>10</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Layer C</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rLayerD">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>50</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Layer D</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="grpThumbNav">
     <property name="geometry">
@@ -3442,71 +3542,67 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="grpLayerSelect">
+   <widget class="QGroupBox" name="grpStickConfig">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>370</y>
-      <width>111</width>
-      <height>115</height>
+      <x>690</x>
+      <y>200</y>
+      <width>291</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="title">
-     <string>Active Layer</string>
+     <string>Analog Profile</string>
     </property>
-    <widget class="QRadioButton" name="rLayerA">
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <widget class="QComboBox" name="configChooserStick">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>75</width>
-       <height>18</height>
+       <width>145</width>
+       <height>20</height>
       </rect>
-     </property>
-     <property name="text">
-      <string>Layer A</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rLayerB">
+    <widget class="QPushButton" name="bConfigRefreshStick">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>75</width>
-       <height>18</height>
+       <x>160</x>
+       <y>30</y>
+       <width>60</width>
+       <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <italic>false</italic>
+      </font>
+     </property>
      <property name="text">
-      <string>Layer B</string>
+      <string>Refresh</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rLayerC">
+    <widget class="QPushButton" name="bConfigEditStick">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>75</width>
-       <height>18</height>
+       <x>225</x>
+       <y>30</y>
+       <width>60</width>
+       <height>20</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Layer C</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="rLayerD">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>75</width>
-       <height>18</height>
-      </rect>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <italic>false</italic>
+      </font>
      </property>
      <property name="text">
-      <string>Layer D</string>
+      <string>Edit</string>
      </property>
     </widget>
    </widget>

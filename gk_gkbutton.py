@@ -48,6 +48,9 @@ class GkButton:
             self.button_bind_d = bind_in
         self.update_label_singleton()
 
+    def set_special_button(self, bind_in):
+        self.button_bind_a = bind_in
+
     def get_button_mode(self):
         return self.button_mode
 
@@ -90,7 +93,11 @@ class GkButton:
                 self.label_d.setStyleSheet(gk_data.gk_layercolor[3])
 
     def update_label_singleton(self):
-        self.label_a.setText(gk_helpers.map_ard_to_txt(self.button_bind_a))
-        self.label_b.setText(gk_helpers.map_ard_to_txt(self.button_bind_b))
-        self.label_c.setText(gk_helpers.map_ard_to_txt(self.button_bind_c))
-        self.label_d.setText(gk_helpers.map_ard_to_txt(self.button_bind_d))
+        if self.label_a is not None:
+            self.label_a.setText(gk_helpers.map_ard_to_txt(self.button_bind_a))
+        if self.label_b is not None:
+            self.label_b.setText(gk_helpers.map_ard_to_txt(self.button_bind_b))
+        if self.label_c is not None:
+            self.label_c.setText(gk_helpers.map_ard_to_txt(self.button_bind_c))
+        if self.label_d is not None:
+            self.label_d.setText(gk_helpers.map_ard_to_txt(self.button_bind_d))

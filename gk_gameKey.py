@@ -6,6 +6,7 @@ import gk_serial
 from gk_gkbutton import GkButton
 from gk_gkaxis import GkAxis
 from gk_uimap import gk_uimap as uimap
+import gk_profiles
 
 
 class GkProfileData:
@@ -37,6 +38,7 @@ class GameKey:
         self.devicename = None
         self.hwmap = None
         self.debug = 1
+        self.stick_config = ""
 
         # get data from device if there's a connection
         if self.connection:
@@ -228,7 +230,7 @@ class GameKey:
             axis.deadzone = 20
 
     def get_json(self):
-        exportblock = {"buttons": {}, "axes": {}}
+        exportblock = {"stick_config": self.stick_config, "buttons": {}, "axes": {}}
         for button_object in self.buttons:
             exportblock["buttons"][button_object] = self.buttons[button_object].get_json()
         for axis_index, axis in enumerate(self.axes):
@@ -251,9 +253,14 @@ class GameKey:
     def map_json(self, gkconfig_in):
         for button_name in gkconfig_in['buttons']:
             self.buttons[button_name].map_json(gkconfig_in['buttons'][button_name])
-        for index_str in gkconfig_in['axes']:
-            if int(index_str) < 30:  # 30 max HW buttons
-                self.axes[int(index_str)].map_json(gkconfig_in['axes'][index_str])
+        for axis_index in gkconfig_in['axes']:
+            if int(axis_index) < 2:  # 2 max HW axes
+                self.axes[int(axis_index)].map_json(gkconfig_in['axes'][axis_index])
+
+    def load_stick_data(self, stick_data):
+        self.stick_config = stick_data['name']
+        for axis_index in stick_data['axes']:
+            self.axes[int(axis_index)].load_stickdata(stick_data['axes'][axis_index])
 
     def update_all_labels(self, active_layer_in):
         for button in self.buttons:

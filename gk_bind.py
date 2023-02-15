@@ -8,7 +8,7 @@ import gk_helpers
 
 class BindUI(QtW.QWidget):
     # Signals
-    bind_data_return = QtC.pyqtSignal(str, int, int)
+    bind_data_return = QtC.pyqtSignal(str, int, int, int)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,9 +18,10 @@ class BindUI(QtW.QWidget):
 
         # variables
         self.buttonname = None
-        self.layer = None
+        self.currentlayer = None
         self.currentbind = 0
         self.currentmode = 0
+        self.newlayer = None
         self.newbind = 0
         self.newmode = 0
         self.mod_shift = False
@@ -59,33 +60,39 @@ class BindUI(QtW.QWidget):
         self.ui.bRShift.clicked.connect(self.keyoverride)
 
         # Mode sets
-        self.ui.bModeKEYB.clicked.connect(self.modeset)
-        self.ui.bModeGPAD.clicked.connect(self.modeset)
-        self.ui.bModeBOTH.clicked.connect(self.modeset)
+        self.ui.bShiftLayerA.clicked.connect(self.keyoverride)
+        self.ui.bShiftLayerB.clicked.connect(self.keyoverride)
+        self.ui.bShiftLayerC.clicked.connect(self.keyoverride)
+        self.ui.bShiftLayerD.clicked.connect(self.keyoverride)
 
         # Set up some button details
-        self.ui.bModeKEYB.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["KEYB"]])
-        self.ui.bModeGPAD.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["GPAD"]])
-        self.ui.bModeBOTH.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode["BOTH"]])
+        self.ui.bShiftLayerA.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.bShiftLayerB.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.bShiftLayerC.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.bShiftLayerD.setStyleSheet(gk_data.gk_layercolor[3])
         # self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[currentkeymode])
 
     def bind_data_in(self, buttontobind, currentkeybinds_in, currentkeymode_in, currentlayer_in):
         self.buttonname = buttontobind
+        self.currentlayer = currentlayer_in
         self.currentbind = currentkeybinds_in
         self.currentmode = currentkeymode_in
-        self.layer = currentlayer_in
+        self.newlayer = currentlayer_in
         self.newbind = currentkeybinds_in
         self.newmode = currentkeymode_in
         self.ui.buttonIndicator.setText(str(self.buttonname))
-        self.layerlabel()
         self.labelupdate()
 
     def labelupdate(self):
         self.ui.keyBindingIndicator.setText(gk_helpers.map_ard_to_txt(self.newbind))
+        self.layerlabel()
 
     def layerlabel(self):
-        self.ui.buttonLayerIndicator.setText("Layer " + str(self.layer))
-        self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.layer])
+        self.ui.buttonLayerIndicator.setText(gk_data.gk_layername[self.newlayer])
+        if self.currentlayer == self.newlayer:
+            self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.newlayer])
+        else:
+            self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.newlayer] + gk_data.gk_layercolor[99])
 
     def clearbind(self):
         # clears current self.newbind and updates label
@@ -96,12 +103,12 @@ class BindUI(QtW.QWidget):
     def acceptbind(self):
         # Accepts new bindings and returns old bindings to bind_data_return signal
         print("acceptbind button", self.buttonname, " key", self.newbind, " mode", self.newmode)
-        self.bind_data_return.emit(self.buttonname, self.newbind, self.newmode)
+        self.bind_data_return.emit(self.buttonname, self.newbind, self.newmode, self.newlayer)
         self.close()
 
     def cancelbind(self):
         # Cancels new binding, returns old bindings to bind_data_return signal
-        self.bind_data_return.emit(self.buttonname, self.currentbind, self.currentmode)
+        self.bind_data_return.emit(self.buttonname, self.currentbind, self.currentmode, self.currentlayer)
         print("cancel button", self.buttonname)
         self.close()
 
@@ -109,6 +116,16 @@ class BindUI(QtW.QWidget):
         # Special keys are chosen by button.text(), careful with button naming
         # Converts button.text() to arduino mapping code
         senderbtn = self.sender()
+        if senderbtn.text() == "LayerA" or \
+                senderbtn.text() == "LayerB" or \
+                senderbtn.text() == "LayerC" or \
+                senderbtn.text() == "LayerD":
+            self.newlayer = 0
+            self.newmode = gk_data.gk_hw_keymode["LAYER"]
+        else:
+            self.newlayer = self.currentlayer
+            self.newmode = gk_data.gk_hw_keymode["KEYB"]
+
         self.newbind = gk_helpers.map_txt_to_ard(senderbtn.text())
         self.labelupdate()
         print("special key override", self.newbind)

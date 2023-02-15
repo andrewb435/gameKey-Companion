@@ -2,28 +2,28 @@
 <ui version="4.0">
  <class>windowStick</class>
  <widget class="QDialog" name="windowStick">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>970</width>
-    <height>260</height>
+    <width>771</width>
+    <height>264</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QGroupBox" name="grpStick">
+  <widget class="QFrame" name="grpStick">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>0</y>
+     <x>0</x>
+     <y>3</y>
      <width>770</width>
      <height>260</height>
     </rect>
-   </property>
-   <property name="title">
-    <string>Analog Stick</string>
    </property>
    <widget class="QLabeledRangeSlider" name="sliderXrange">
     <property name="geometry">
@@ -135,11 +135,11 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="bResetAxes">
+   <widget class="QPushButton" name="bResetStick">
     <property name="geometry">
      <rect>
-      <x>235</x>
-      <y>115</y>
+      <x>360</x>
+      <y>135</y>
       <width>105</width>
       <height>20</height>
      </rect>
@@ -151,11 +151,11 @@
      <string>Reset Stick</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bSendAxes">
+   <widget class="QPushButton" name="bSaveStick">
     <property name="geometry">
      <rect>
-      <x>235</x>
-      <y>90</y>
+      <x>360</x>
+      <y>110</y>
       <width>105</width>
       <height>20</height>
      </rect>
@@ -164,14 +164,14 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
-     <string>Send Stick</string>
+     <string>Save</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="bUpdateAnalog">
+   <widget class="QPushButton" name="bSaveStickAs">
     <property name="geometry">
      <rect>
-      <x>235</x>
-      <y>140</y>
+      <x>360</x>
+      <y>160</y>
       <width>105</width>
       <height>20</height>
      </rect>
@@ -180,7 +180,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
-     <string>Update Current</string>
+     <string>Save As</string>
     </property>
    </widget>
    <widget class="QLabeledRangeSlider" name="sliderYrange">
@@ -380,208 +380,6 @@ Up/Down</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QFrame" name="grpThumbStick">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>50</y>
-      <width>155</width>
-      <height>185</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="lThumbStickPush">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>90</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Push</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="kThumbStickW">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>65</y>
-       <width>35</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="kThumbStickPush">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>65</y>
-       <width>35</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lThumbStickE">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>90</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Fwd</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="kThumbStickS">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>115</y>
-       <width>35</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lThumbStickS">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>140</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Down</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lThumbStickN">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>5</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Up</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="kThumbStickE">
-     <property name="geometry">
-      <rect>
-       <x>100</x>
-       <y>65</y>
-       <width>35</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lThumbStickW">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>55</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Back</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="kThumbStickN">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>30</y>
-       <width>35</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="lThumbOutBAddon">
-    <property name="geometry">
-     <rect>
-      <x>465</x>
-      <y>190</y>
-      <width>95</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Outer Thumb</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="kThumbBAddon">
-    <property name="geometry">
-     <rect>
-      <x>495</x>
-      <y>165</y>
-      <width>35</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
@@ -602,7 +400,7 @@ Up/Down</string>
       <rect>
        <x>5</x>
        <y>45</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -618,7 +416,7 @@ Up/Down</string>
       <rect>
        <x>5</x>
        <y>25</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -634,7 +432,7 @@ Up/Down</string>
       <rect>
        <x>5</x>
        <y>5</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -664,9 +462,9 @@ Up/Down</string>
     <widget class="QRadioButton" name="radioYModeAnalog">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>45</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -683,9 +481,9 @@ Up/Down</string>
     <widget class="QRadioButton" name="radioYModeDigital">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>25</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -702,9 +500,9 @@ Up/Down</string>
     <widget class="QCheckBox" name="iYInvert">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>5</y>
-       <width>90</width>
+       <width>100</width>
        <height>20</height>
       </rect>
      </property>
@@ -715,6 +513,44 @@ Up/Down</string>
       <string>Y Invert</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="lName">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>80</y>
+      <width>200</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bCancel">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>185</y>
+      <width>105</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
    </widget>
   </widget>
  </widget>

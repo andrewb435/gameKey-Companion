@@ -1,9 +1,12 @@
-import gk_serial
 from ui_main import Ui_windowMain
-from gk_bind import BindUI
 from PyQt5 import QtWidgets
+import gk_serial
+from gk_bind import BindUI
+from gk_stick import StickUI
 import gk_gameKey
 import gk_profiles
+import gk_helpers
+import gk_gkstick
 
 # Serial
 import serial.tools.list_ports
@@ -25,6 +28,7 @@ class MainUI(QtWidgets.QMainWindow):
 
         # Binding UI setup
         self.bindui = BindUI()
+        self.stickui = StickUI()
 
         # gk_cur setup
         self.gk_cur = None
@@ -34,13 +38,18 @@ class MainUI(QtWidgets.QMainWindow):
         self.init_colors()
 
         # Profile setup
-        self.ui.bConfigRefresh.clicked.connect(self.profile_reload)
+        self.ui.bConfigRefresh.clicked.connect(self.profile_gamepad_refresh)
         self.profile_data = gk_profiles.GkProfileList()
         self.ui.bConfigSave.clicked.connect(self.profile_save)
         self.ui.bConfigLoad.clicked.connect(self.profile_load)
-        self.profile_reload()
-        # self.ui.configChooser.currentTextChanged.connect(self.profile_load) # Load from file on select
+        self.profile_gamepad_refresh()
+        self.profile_stick_refresh()
         self.ui.bConfigSaveAs.clicked.connect(self.profile_saveas)
+
+        # Stick profile setup
+        self.ui.bConfigRefreshStick.clicked.connect(self.profile_stick_refresh)
+        self.ui.bConfigEditStick.clicked.connect(self.profile_stick_edit)
+        self.ui.configChooserStick.currentTextChanged.connect(self.profile_stick_load)
 
         # Button UI actions
         self.ui.bScanSerial.clicked.connect(self.get_serial)
@@ -97,11 +106,11 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.kThumbNavPush.clicked.connect(self.bind_window)
 
         # ThumbStick
-        self.ui.kThumbStickN.clicked.connect(self.bind_window)
-        self.ui.kThumbStickE.clicked.connect(self.bind_window)
-        self.ui.kThumbStickS.clicked.connect(self.bind_window)
-        self.ui.kThumbStickW.clicked.connect(self.bind_window)
-        self.ui.kThumbStickPush.clicked.connect(self.bind_window)
+        self.ui.kThumbStickUp.clicked.connect(self.bind_window_single)
+        self.ui.kThumbStickFwd.clicked.connect(self.bind_window_single)
+        self.ui.kThumbStickDown.clicked.connect(self.bind_window_single)
+        self.ui.kThumbStickBack.clicked.connect(self.bind_window_single)
+        self.ui.kThumbStickPush.clicked.connect(self.bind_window_single)
 
         # Thumb Outer Button
         self.ui.kThumbAddon.clicked.connect(self.bind_window)
@@ -296,46 +305,65 @@ class MainUI(QtWidgets.QMainWindow):
 
     def bind_clearall(self):
         self.gk_cur.init_buttons()
-        self.gk_cur.reset_axes_limits()
-        self.gk_cur.update_all_labels()
+        self.gk_cur.map_button_labels(self)
+        self.gk_cur.update_all_labels(self.activeLayer)
 
     def set_config(self):
         self.gk_cur.set_buttons()
 
     def bind_window(self):
         srcinput = self.sender()
-        currentkeybind = 0
-        currentkeymode = 0
-        try:
-            currentkeybind = self.gk_cur.buttons[srcinput.objectName()].get_button_bind(self.activeLayer)
-            currentkeymode = self.gk_cur.buttons[srcinput.objectName()].get_button_mode()
-        except KeyError:
-            if srcinput.objectName() == 'kThumbStickN':
-                currentkeybind[0] = self.gk_cur.axes[0].key_up
-            elif srcinput.objectName() == 'kThumbStickS':
-                currentkeybind[0] = self.gk_cur.axes[0].key_down
-            if srcinput.objectName() == 'kThumbStickE':
-                currentkeybind[0] = self.gk_cur.axes[1].key_up
-            elif srcinput.objectName() == 'kThumbStickW':
-                currentkeybind[0] = self.gk_cur.axes[1].key_down
+        currentkeybind = self.gk_cur.buttons[srcinput.objectName()].get_button_bind(self.activeLayer)
+        currentkeymode = self.gk_cur.buttons[srcinput.objectName()].get_button_mode()
 
         self.bindui.bind_data_return.connect(self.set_bind)
         self.bindui.bind_data_in(srcinput.objectName(), currentkeybind, currentkeymode, self.activeLayer)
         self.bindui.show()
 
-    def set_bind(self, newbutton, newkeybind, newkeymode):
-        if newbutton == 'kThumbStickN':
-            self.gk_cur.axes[0].key_up = newkeybind
-        elif newbutton == 'kThumbStickS':
-            self.gk_cur.axes[0].key_down = newkeybind
-        if newbutton == 'kThumbStickE':
-            self.gk_cur.axes[1].key_up = newkeybind
-        elif newbutton == 'kThumbStickW':
-            self.gk_cur.axes[1].key_down = newkeybind
-        else:
-            self.gk_cur.buttons[newbutton].set_button_bind(newkeybind, self.activeLayer)
+    def bind_window_single(self):
+        srcinput = self.sender()
+        currentkeybind = 0
+        currentkeymode = 0
+        if srcinput.objectName() == 'kThumbStickPush':
+            currentkeybind = self.gk_cur.buttons[srcinput.objectName()].button_bind_a
+            currentkeymode = self.gk_cur.buttons[srcinput.objectName()].get_button_mode()
+        elif srcinput.objectName() == 'kThumbStickUp':
+            currentkeybind = self.gk_cur.axes[0].key_up
+        elif srcinput.objectName() == 'kThumbStickDown':
+            currentkeybind = self.gk_cur.axes[0].key_down
+        elif srcinput.objectName() == 'kThumbStickFwd':
+            currentkeybind = self.gk_cur.axes[1].key_up
+        elif srcinput.objectName() == 'kThumbStickBack':
+            currentkeybind = self.gk_cur.axes[1].key_down
+
+        self.bindui.bind_data_return.connect(self.set_bind_single)
+        self.bindui.bind_data_in(srcinput.objectName(), currentkeybind, currentkeymode, self.activeLayer)
+        self.bindui.show()
+
+    def set_bind(self, newbutton, newkeybind, newkeymode, newkeylayer):
+        self.gk_cur.buttons[newbutton].set_button_bind(newkeybind, newkeylayer)
+        self.gk_cur.buttons[newbutton].set_button_mode(newkeymode)
+        print("new btn ", str(newbutton), " key", str(newkeybind), " mode", str(newkeymode), " layer", str(newkeylayer))
+
+    def set_bind_single(self, newbutton, newkeybind, newkeymode, newkeylayer):
+        if newbutton == 'kThumbStickPush':
+            self.gk_cur.buttons[newbutton].button_bind_a = newkeybind
+            self.gk_cur.buttons[newbutton].set_special_button(newkeybind)
             self.gk_cur.buttons[newbutton].set_button_mode(newkeymode)
-        print("new btn ", str(newbutton), " key", str(newkeybind), " mode", str(newkeymode))
+            self.ui.kThumbStickPush.setText(gk_helpers.map_ard_to_txt(newkeybind))
+        elif newbutton == 'kThumbStickUp':
+            self.gk_cur.axes[0].key_up = newkeybind
+            self.ui.kThumbStickUp.setText(gk_helpers.map_ard_to_txt(newkeybind))
+        elif newbutton == 'kThumbStickDown':
+            self.gk_cur.axes[0].key_down = newkeybind
+            self.ui.kThumbStickDown.setText(gk_helpers.map_ard_to_txt(newkeybind))
+        elif newbutton == 'kThumbStickFwd':
+            self.gk_cur.axes[1].key_up = newkeybind
+            self.ui.kThumbStickFwd.setText(gk_helpers.map_ard_to_txt(newkeybind))
+        elif newbutton == 'kThumbStickBack':
+            self.gk_cur.axes[1].key_down = newkeybind
+            self.ui.kThumbStickBack.setText(gk_helpers.map_ard_to_txt(newkeybind))
+        print("new special btn ", str(newbutton), " key", str(newkeybind), " mode", str(newkeymode))
 
     def save_eeprom(self):
         self.gk_cur.set_eeprom()
@@ -343,20 +371,19 @@ class MainUI(QtWidgets.QMainWindow):
     def profile_load(self):
         if self.ui.configChooser.currentIndex() > 0:
             # index > 'Onboard' profile
-            self.gk_cur.map_json(self.profile_data.load_profile(self.ui.configChooser.currentText()))
-            self.gk_cur.update_all_labels()
+            self.gk_cur.map_json(self.profile_data.load_gamepad_profile(self.ui.configChooser.currentText()))
         elif self.ui.configChooser.currentIndex() == 0:
             # index = 'Onboard' profile
             self.gk_cur.get_config()
-            self.gk_cur.update_all_labels()
+        self.gk_cur.update_all_labels()
 
-    def profile_reload(self):
-        self.profile_data.get_profile_list()
+    def profile_gamepad_refresh(self):
+        self.profile_data.get_gamepad_profile_list()
         # Store the current selection for after rebuild
         curprofile = self.ui.configChooser.currentText()
         self.ui.configChooser.clear()
         self.ui.configChooser.addItem("Onboard")
-        for profileitem in self.profile_data.profile_items:
+        for profileitem in self.profile_data.gamepad_profiles:
             self.ui.configChooser.addItem(profileitem.config.name)
         if self.ui.configChooser.findText(curprofile) > 0:
             # Return the current selection to selected status
@@ -365,10 +392,49 @@ class MainUI(QtWidgets.QMainWindow):
             # set to Onboard if nothing else
             self.ui.configChooser.setCurrentIndex(0)
 
+    def profile_stick_refresh(self):
+        self.profile_data.get_stick_profile_list()
+        curstickprofile = self.ui.configChooserStick.currentText()
+        self.ui.configChooserStick.clear()
+        self.ui.configChooserStick.addItem("Onboard")
+        for stickprofile in self.profile_data.stick_profiles:
+            self.ui.configChooserStick.addItem(stickprofile.config.name)
+        if self.ui.configChooserStick.findText(curstickprofile) > 0:
+            self.ui.configChooserStick.setCurrentIndex(self.ui.configChooserStick.findText(curstickprofile))
+        else:
+            self.ui.configChooser.setCurrentIndex(0)
+
+    def profile_stick_edit(self):
+        currentstick = self.ui.configChooserStick.currentText()
+        if currentstick == "Onboard":
+            axisdata = {"axes": {}}
+            for axis_index, axis in enumerate(self.gk_cur.axes):
+                axisdata["axes"][str(axis_index)] = axis.get_json()
+            self.stickui.stick_input(currentstick, axisdata)
+        else:
+            self.stickui.profile_input(currentstick, self.profile_data.load_stick_profile(currentstick))
+
+        self.stickui.profile_ctrl = self.profile_data
+        self.stickui.stick_data_return.connect(self.profile_stick_return)
+        self.stickui.show()
+
+    def profile_stick_load(self):
+        chooser = self.sender()
+        if chooser == self.ui.configChooserStick:
+            self.profile_stick_return(self.ui.configChooserStick.currentText())
+
+    def profile_stick_return(self, stickname_in):
+        self.profile_data.get_stick_profile_list()
+        for stickprofile in self.profile_data.stick_profiles:
+            if stickname_in == stickprofile.config.name:
+                self.ui.configChooserStick.setCurrentIndex(self.ui.configChooserStick.findText(stickname_in))
+                self.gk_cur.load_stick_data(self.profile_data.load_stick_profile(stickname_in))
+                self.check_stick_mode()
+
     def profile_save(self):
         if self.ui.configChooser.currentIndex() > 0:
             # Skip 'Onboard' index 0
-            self.profile_data.output_json(self.gk_cur.get_json(), self.ui.configChooser.currentText())
+            self.profile_data.output_gamepad_config_file(self.gk_cur.get_json(), self.ui.configChooser.currentText())
         elif self.ui.configChooser.currentIndex() == 0:
             # 'Onboard' index 0
             self.set_config()
@@ -379,9 +445,9 @@ class MainUI(QtWidgets.QMainWindow):
             self.profile_data.user_home + self.profile_data.config_path,
             filter="*.json"
         )
-        file = save_dialog[0] + ".json"
-        self.profile_data.save_as(file, self.gk_cur.get_json())
-        self.profile_reload()
+        file = save_dialog[0].rstrip(".json") + ".json"
+        self.profile_data.save_as_profile(file, self.gk_cur.get_json())
+        self.profile_gamepad_refresh()
 
     def change_layer(self):
         srcinput = self.sender()
@@ -395,8 +461,8 @@ class MainUI(QtWidgets.QMainWindow):
             self.activeLayer = 3
         self.gk_cur.update_all_labels(self.activeLayer)
 
-    def togglestick(self):
-        if self.ui.grpThumbStick.isHidden():
-            self.ui.grpThumbStick.show()
+    def check_stick_mode(self):
+        if self.gk_cur.axes[0].analog_mode or self.gk_cur.axes[1].analog_mode:
+            self.ui.grpThumbStick.setEnabled(False)
         else:
-            self.ui.grpThumbStick.hide()
+            self.ui.grpThumbStick.setEnabled(True)

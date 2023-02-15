@@ -20,6 +20,14 @@ class GkAxis:
         self.analog_mode = gk_axisdata['analog_mode']
         self.invert = gk_axisdata['invert']
 
+    def load_stickdata(self, stickdata):
+        self.low = stickdata['low']
+        self.center = stickdata['center']
+        self.high = stickdata['high']
+        self.deadzone = stickdata['deadzone']
+        self.analog_mode = stickdata['analog_mode']
+        self.invert = stickdata['invert']
+
     def get_json(self):
         export_axis = {
             "low": self.low,

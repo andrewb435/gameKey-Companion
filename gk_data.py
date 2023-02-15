@@ -246,11 +246,7 @@ gk_hw_lefthand = {
     "kPinkyAddon": 26,
     "kThumbStickPush": 27,
     "kThumbAddon": 28,
-    "None": 29,
-    "kThumbStickN": 100,
-    "kThumbStickE": 101,
-    "kThumbStickS": 102,
-    "kThumbStickW": 103
+    "None": 29
 }
 
 gk_hw_righthand = {
@@ -283,11 +279,7 @@ gk_hw_righthand = {
     "kPinkyAddon": 26,
     "kThumbStickPush": 27,
     "kThumbAddon": 28,
-    "None": 29,
-    "kThumbStickN": 100,
-    "kThumbStickE": 101,
-    "kThumbStickS": 102,
-    "kThumbStickW": 103
+    "None": 29
 }
 
 gk_hw_keymode = {
@@ -322,14 +314,21 @@ gk_colormode = {
     4: ""
 }
 
+gk_layername = {
+    0: "LayerA",
+    1: "LayerB",
+    2: "LayerC",
+    3: "LayerD"
+}
 gk_layercolor = {
     # Colors from https://github.com/filipworksdev/colorblind-palette-16
-    0: "background-color: rgba(37,37,37,255); color: rgba(255,255,255,255); border-radius: 6px",
-    1: "background-color: rgba(0,73,73,255); color: rgba(255,255,255,255); border-radius: 6px",
-    2: "background-color: rgba(73, 0, 146, 255); color: rgba(255,255,255,255); border-radius: 6px",
-    3: "background-color: rgba(143, 78, 0, 255); color: rgba(255,255,255,255); border-radius: 6px",
-    10: "background-color: rgba(37,37,37,100); color: rgba(255,255,255,100); border-radius: 6px",
-    11: "background-color: rgba(0,73,73,100); color: rgba(255,255,255,100); border-radius: 6px",
-    12: "background-color: rgba(73, 0, 146, 100); color: rgba(255,255,255,100); border-radius: 6px",
-    13: "background-color: rgba(143, 78, 0, 100); color: rgba(255,255,255,100); border-radius: 6px",
+    0: "background-color: rgba(67,67,67,255); color: rgba(255,255,255,255); border-radius: 6px;",
+    1: "background-color: rgba(0,73,73,255); color: rgba(255,255,255,255); border-radius: 6px;",
+    2: "background-color: rgba(73, 0, 146, 255); color: rgba(255,255,255,255); border-radius: 6px;",
+    3: "background-color: rgba(143, 78, 0, 255); color: rgba(255,255,255,255); border-radius: 6px;",
+    10: "background-color: rgba(67,67,67,100); color: rgba(255,255,255,100); border-radius: 6px;",
+    11: "background-color: rgba(0,73,73,100); color: rgba(255,255,255,100); border-radius: 6px;",
+    12: "background-color: rgba(73, 0, 146, 100); color: rgba(255,255,255,100); border-radius: 6px;",
+    13: "background-color: rgba(143, 78, 0, 100); color: rgba(255,255,255,100); border-radius: 6px;",
+    99: " border: 5px solid #920000"
 }
