@@ -295,6 +295,7 @@ class MainUI(QtWidgets.QMainWindow):
         self.gk_cur.get_config()
         self.gk_cur.map_button_labels(self)
         self.gk_cur.update_all_labels(self.activeLayer)
+        self.profile_stick_return(self.gk_cur.stick_config)
 
     def devicechange(self):
         if len(gamekeylist) > 0:
@@ -375,7 +376,8 @@ class MainUI(QtWidgets.QMainWindow):
         elif self.ui.configChooser.currentIndex() == 0:
             # index = 'Onboard' profile
             self.gk_cur.get_config()
-        self.gk_cur.update_all_labels()
+        self.gk_cur.update_all_labels(self.activeLayer)
+        self.profile_stick_return(self.gk_cur.stick_config)
 
     def profile_gamepad_refresh(self):
         self.profile_data.get_gamepad_profile_list()

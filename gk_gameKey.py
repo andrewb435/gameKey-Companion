@@ -251,6 +251,7 @@ class GameKey:
             self.buttons[button].label_d = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][4])
 
     def map_json(self, gkconfig_in):
+        self.stick_config = gkconfig_in['stick_config']
         for button_name in gkconfig_in['buttons']:
             self.buttons[button_name].map_json(gkconfig_in['buttons'][button_name])
         for axis_index in gkconfig_in['axes']:
