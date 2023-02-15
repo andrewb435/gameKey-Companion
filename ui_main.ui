@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>553</height>
+    <width>985</width>
+    <height>545</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,7 +32,7 @@
      <rect>
       <x>5</x>
       <y>5</y>
-      <width>150</width>
+      <width>155</width>
       <height>28</height>
      </rect>
     </property>
@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="bSendAll">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>5</y>
+      <x>10</x>
+      <y>250</y>
       <width>150</width>
       <height>28</height>
      </rect>
@@ -53,8 +53,8 @@
    <widget class="QPushButton" name="bClearAll">
     <property name="geometry">
      <rect>
-      <x>625</x>
-      <y>5</y>
+      <x>10</x>
+      <y>310</y>
       <width>150</width>
       <height>28</height>
      </rect>
@@ -66,8 +66,8 @@
    <widget class="QPushButton" name="bScanSerial">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>5</y>
+      <x>10</x>
+      <y>220</y>
       <width>150</width>
       <height>28</height>
      </rect>
@@ -79,8 +79,8 @@
    <widget class="QPushButton" name="bRetrieve">
     <property name="geometry">
      <rect>
-      <x>315</x>
-      <y>5</y>
+      <x>10</x>
+      <y>280</y>
       <width>150</width>
       <height>28</height>
      </rect>
@@ -95,7 +95,7 @@
       <x>5</x>
       <y>35</y>
       <width>155</width>
-      <height>221</height>
+      <height>151</height>
      </rect>
     </property>
     <property name="title">
@@ -188,7 +188,7 @@
      <property name="geometry">
       <rect>
        <x>5</x>
-       <y>185</y>
+       <y>110</y>
        <width>145</width>
        <height>30</height>
       </rect>
@@ -262,8 +262,8 @@
    <widget class="QPushButton" name="bSaveEEPROM">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>5</y>
+      <x>10</x>
+      <y>340</y>
       <width>150</width>
       <height>28</height>
      </rect>
@@ -276,7 +276,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>260</y>
+      <y>190</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -292,7 +292,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>260</y>
+      <y>190</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -308,7 +308,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>260</y>
+      <y>190</y>
       <width>45</width>
       <height>30</height>
      </rect>
@@ -323,10 +323,10 @@
    <widget class="QGroupBox" name="grpStick">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>40</y>
-      <width>251</width>
-      <height>251</height>
+      <x>690</x>
+      <y>5</y>
+      <width>291</width>
+      <height>191</height>
      </rect>
     </property>
     <property name="title">
@@ -338,7 +338,7 @@
        <x>10</x>
        <y>20</y>
        <width>155</width>
-       <height>185</height>
+       <height>161</height>
       </rect>
      </property>
      <widget class="QLabel" name="lThumbStickPush">
@@ -502,51 +502,102 @@
       </property>
      </widget>
     </widget>
-    <widget class="QFrame" name="grpThumbOuter">
+    <widget class="QFrame" name="grpThumbAddon">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>130</y>
+       <x>170</x>
+       <y>70</y>
        <width>110</width>
-       <height>65</height>
+       <height>76</height>
       </rect>
      </property>
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
+      <enum>QFrame::Sunken</enum>
      </property>
-     <widget class="QPushButton" name="kThumbBAddon">
+     <widget class="QLabel" name="lThumbAddonD">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>10</y>
-        <width>35</width>
-        <height>25</height>
+        <x>2</x>
+        <y>58</y>
+        <width>50</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>D</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lThumbAddonA">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>2</y>
+        <width>50</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>A</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lThumbAddonB">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>21</y>
+        <width>50</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>B</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lThumbAddonC">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>39</y>
+        <width>50</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>C</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="kThumbAddon">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>110</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
       </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lThumbOutBAddon">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>35</y>
-        <width>95</width>
-        <height>25</height>
-       </rect>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
-       <string>Outer Thumb</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <string>Thumb</string>
       </property>
      </widget>
     </widget>
@@ -554,10 +605,10 @@
    <widget class="QFrame" name="grpFingers">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>300</y>
-      <width>1001</width>
-      <height>261</height>
+      <x>160</x>
+      <y>0</y>
+      <width>521</width>
+      <height>551</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -569,10 +620,10 @@
     <widget class="QGroupBox" name="grpRing">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>0</y>
-       <width>252</width>
-       <height>253</height>
+       <x>140</x>
+       <y>5</y>
+       <width>110</width>
+       <height>535</height>
       </rect>
      </property>
      <property name="title">
@@ -587,9 +638,9 @@
      <widget class="QFrame" name="grpRing1">
       <property name="geometry">
        <rect>
-        <x>2</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>450</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -666,14 +717,17 @@
       <widget class="QPushButton" name="kRing1">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B1</string>
@@ -683,9 +737,9 @@
      <widget class="QFrame" name="grpRing2">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>370</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -762,14 +816,17 @@
       <widget class="QPushButton" name="kRing2">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B2</string>
@@ -779,9 +836,9 @@
      <widget class="QFrame" name="grpRing3">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>290</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -858,14 +915,17 @@
       <widget class="QPushButton" name="kRing3">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B3</string>
@@ -875,9 +935,9 @@
      <widget class="QFrame" name="grpRing4">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>210</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -954,14 +1014,17 @@
       <widget class="QPushButton" name="kRing4">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B4</string>
@@ -971,9 +1034,9 @@
      <widget class="QFrame" name="grpRing5">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>25</y>
-        <width>100</width>
+        <x>10</x>
+        <y>130</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1050,14 +1113,17 @@
       <widget class="QPushButton" name="kRing5">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B5</string>
@@ -1068,10 +1134,10 @@
     <widget class="QGroupBox" name="grpMiddle">
      <property name="geometry">
       <rect>
-       <x>500</x>
-       <y>0</y>
-       <width>252</width>
-       <height>253</height>
+       <x>270</x>
+       <y>5</y>
+       <width>110</width>
+       <height>535</height>
       </rect>
      </property>
      <property name="title">
@@ -1086,9 +1152,9 @@
      <widget class="QFrame" name="grpMiddle1">
       <property name="geometry">
        <rect>
-        <x>2</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>450</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1165,14 +1231,17 @@
       <widget class="QPushButton" name="kMiddle1">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B1</string>
@@ -1182,9 +1251,9 @@
      <widget class="QFrame" name="grpMiddle2">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>370</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1261,14 +1330,17 @@
       <widget class="QPushButton" name="kMiddle2">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B2</string>
@@ -1278,9 +1350,9 @@
      <widget class="QFrame" name="grpMiddle3">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>290</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1357,14 +1429,17 @@
       <widget class="QPushButton" name="kMiddle3">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B3</string>
@@ -1374,9 +1449,9 @@
      <widget class="QFrame" name="grpMiddle4">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>210</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1453,14 +1528,17 @@
       <widget class="QPushButton" name="kMiddle4">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B4</string>
@@ -1470,9 +1548,9 @@
      <widget class="QFrame" name="grpMiddle5">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>25</y>
-        <width>100</width>
+        <x>10</x>
+        <y>130</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -1549,637 +1627,20 @@
       <widget class="QPushButton" name="kMiddle5">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B5</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="grpIndex">
-     <property name="geometry">
-      <rect>
-       <x>750</x>
-       <y>0</y>
-       <width>252</width>
-       <height>253</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Index</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-     <widget class="QCheckBox" name="chkIndexAddon">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>5</y>
-        <width>82</width>
-        <height>15</height>
-       </rect>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="text">
-       <string>Addon</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QFrame" name="grpIndex1">
-      <property name="geometry">
-       <rect>
-        <x>2</x>
-        <y>100</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexD1">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>58</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexA1">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexB1">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexC1">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndex1">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>B1</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="grpIndex2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>175</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexD2">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>60</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexA2">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexB2">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexC2">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndex2">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>B2</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="grpIndex3">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>175</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexD3">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>58</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexA3">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexB3">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexC3">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndex3">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>B3</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="grpIndex4">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexD4">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>58</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexA4">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexB4">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexC4">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndex4">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>B4</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="grpIndex5">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>25</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexD5">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>58</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexA5">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexB5">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexC5">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndex5">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>B5</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QFrame" name="grpIndexAddon">
-      <property name="geometry">
-       <rect>
-        <x>2</x>
-        <y>25</y>
-        <width>100</width>
-        <height>76</height>
-       </rect>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Sunken</enum>
-      </property>
-      <widget class="QLabel" name="lIndexDAddon">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>58</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>D</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexAAddon">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>2</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>A</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexBAddon">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>21</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>B</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lIndexCAddon">
-       <property name="geometry">
-        <rect>
-         <x>2</x>
-         <y>39</y>
-         <width>50</width>
-         <height>15</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>C</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="kIndexAddon">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>Side</string>
        </property>
       </widget>
      </widget>
@@ -2187,10 +1648,10 @@
     <widget class="QGroupBox" name="grpPinky">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>252</width>
-       <height>253</height>
+       <x>10</x>
+       <y>5</y>
+       <width>110</width>
+       <height>535</height>
       </rect>
      </property>
      <property name="title">
@@ -2208,8 +1669,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>5</y>
+        <x>20</x>
+        <y>30</y>
         <width>82</width>
         <height>15</height>
        </rect>
@@ -2230,9 +1691,9 @@
      <widget class="QFrame" name="grpPinky1">
       <property name="geometry">
        <rect>
-        <x>2</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>450</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2309,14 +1770,17 @@
       <widget class="QPushButton" name="kPinky1">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B1</string>
@@ -2326,9 +1790,9 @@
      <widget class="QFrame" name="grpPinky2">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>370</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2405,14 +1869,17 @@
       <widget class="QPushButton" name="kPinky2">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B2</string>
@@ -2422,9 +1889,9 @@
      <widget class="QFrame" name="grpPinky3">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>175</y>
-        <width>100</width>
+        <x>10</x>
+        <y>290</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2501,14 +1968,17 @@
       <widget class="QPushButton" name="kPinky3">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B3</string>
@@ -2518,9 +1988,9 @@
      <widget class="QFrame" name="grpPinky4">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>100</y>
-        <width>100</width>
+        <x>10</x>
+        <y>210</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2597,14 +2067,17 @@
       <widget class="QPushButton" name="kPinky4">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B4</string>
@@ -2614,9 +2087,9 @@
      <widget class="QFrame" name="grpPinky5">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>25</y>
-        <width>100</width>
+        <x>10</x>
+        <y>130</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2693,14 +2166,17 @@
       <widget class="QPushButton" name="kPinky5">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>B5</string>
@@ -2710,9 +2186,9 @@
      <widget class="QFrame" name="grpPinkyAddon">
       <property name="geometry">
        <rect>
-        <x>2</x>
-        <y>25</y>
-        <width>100</width>
+        <x>10</x>
+        <y>50</y>
+        <width>90</width>
         <height>76</height>
        </rect>
       </property>
@@ -2789,14 +2265,661 @@
       <widget class="QPushButton" name="kPinkyAddon">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>25</y>
-         <width>35</width>
-         <height>25</height>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
         </rect>
        </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>Side</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="grpIndex">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>5</y>
+       <width>110</width>
+       <height>535</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Index</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+     <widget class="QCheckBox" name="chkIndexAddon">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>82</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>Addon</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QFrame" name="grpIndex1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>450</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexD1">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>58</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexA1">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexB1">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexC1">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndex1">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>B1</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="grpIndex2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>370</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexD2">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>60</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexA2">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:#666; border-radius: 6px;</string>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexB2">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexC2">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndex2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>B2</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="grpIndex3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>290</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexD3">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>58</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexA3">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexB3">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexC3">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndex3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>B3</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="grpIndex4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>210</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexD4">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>58</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexA4">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexB4">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexC4">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndex4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>B4</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="grpIndex5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexD5">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>58</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexA5">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexB5">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexC5">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndex5">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
+       </property>
+       <property name="text">
+        <string>B5</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="grpIndexAddon">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>90</width>
+        <height>76</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <widget class="QLabel" name="lIndexDAddon">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>58</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>D</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexAAddon">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>2</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexBAddon">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>21</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>B</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lIndexCAddon">
+       <property name="geometry">
+        <rect>
+         <x>2</x>
+         <y>39</y>
+         <width>50</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>C</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="kIndexAddon">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>90</width>
+         <height>76</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
        </property>
        <property name="text">
         <string>Side</string>
@@ -2808,10 +2931,10 @@
    <widget class="QGroupBox" name="grpThumbNav">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>40</y>
-      <width>311</width>
-      <height>251</height>
+      <x>690</x>
+      <y>265</y>
+      <width>291</width>
+      <height>275</height>
      </rect>
     </property>
     <property name="title">
@@ -2827,8 +2950,8 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>21</y>
-       <width>100</width>
+       <y>30</y>
+       <width>90</width>
        <height>76</height>
       </rect>
      </property>
@@ -2905,14 +3028,17 @@
      <widget class="QPushButton" name="kThumbNavUp">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>25</y>
-        <width>35</width>
-        <height>25</height>
+        <x>0</x>
+        <y>0</y>
+        <width>90</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
        <string>Up</string>
@@ -2923,8 +3049,8 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>169</y>
-       <width>100</width>
+       <y>190</y>
+       <width>90</width>
        <height>76</height>
       </rect>
      </property>
@@ -3001,14 +3127,17 @@
      <widget class="QPushButton" name="kThumbNavDown">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>25</y>
-        <width>35</width>
-        <height>25</height>
+        <x>0</x>
+        <y>0</y>
+        <width>90</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
        <string>Dn</string>
@@ -3018,9 +3147,9 @@
     <widget class="QFrame" name="grpThumbNavBack">
      <property name="geometry">
       <rect>
-       <x>2</x>
-       <y>95</y>
-       <width>100</width>
+       <x>5</x>
+       <y>110</y>
+       <width>90</width>
        <height>76</height>
       </rect>
      </property>
@@ -3097,14 +3226,17 @@
      <widget class="QPushButton" name="kThumbNavBack">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>25</y>
-        <width>35</width>
-        <height>25</height>
+        <x>0</x>
+        <y>0</y>
+        <width>90</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
        <string>Back</string>
@@ -3115,8 +3247,8 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>95</y>
-       <width>100</width>
+       <y>110</y>
+       <width>90</width>
        <height>76</height>
       </rect>
      </property>
@@ -3193,14 +3325,17 @@
      <widget class="QPushButton" name="kThumbNavPush">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>25</y>
-        <width>35</width>
-        <height>25</height>
+        <x>0</x>
+        <y>0</y>
+        <width>90</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
        <string>Push</string>
@@ -3210,9 +3345,9 @@
     <widget class="QFrame" name="grpThumbNavFwd">
      <property name="geometry">
       <rect>
-       <x>198</x>
-       <y>95</y>
-       <width>100</width>
+       <x>195</x>
+       <y>110</y>
+       <width>90</width>
        <height>76</height>
       </rect>
      </property>
@@ -3289,14 +3424,17 @@
      <widget class="QPushButton" name="kThumbNavFwd">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>25</y>
-        <width>35</width>
-        <height>25</height>
+        <x>0</x>
+        <y>0</y>
+        <width>90</width>
+        <height>76</height>
        </rect>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border:0;background:transparent;text-align:right; padding-right:5px;</string>
       </property>
       <property name="text">
        <string>Fwd</string>
@@ -3307,9 +3445,9 @@
    <widget class="QGroupBox" name="grpLayerSelect">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>40</y>
-      <width>95</width>
+      <x>20</x>
+      <y>370</y>
+      <width>111</width>
       <height>115</height>
      </rect>
     </property>

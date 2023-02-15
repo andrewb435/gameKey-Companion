@@ -237,6 +237,7 @@ class GameKey:
 
     def map_button_labels(self, ui_in):
         ui = ui_in
+        button_uimap_index = None
         for button in self.buttons:
             for index, sublist in enumerate(uimap):
                 if button in sublist:

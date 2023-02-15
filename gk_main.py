@@ -3,7 +3,6 @@ from ui_main import Ui_windowMain
 from gk_bind import BindUI
 from PyQt5 import QtWidgets
 import gk_gameKey
-import gk_helpers
 import gk_profiles
 
 # Serial
@@ -105,7 +104,7 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.kThumbStickPush.clicked.connect(self.bind_window)
 
         # Thumb Outer Button
-        self.ui.kThumbBAddon.clicked.connect(self.bind_window)
+        self.ui.kThumbAddon.clicked.connect(self.bind_window)
 
         # ComboBox UI actions
         self.ui.comList.currentTextChanged.connect(self.devicechange)
@@ -293,6 +292,7 @@ class MainUI(QtWidgets.QMainWindow):
             if len(gamekeylist[self.ui.comList.currentIndex()].buttons) > 0:
                 if len(gamekeylist[self.ui.comList.currentIndex()].axes) > 0:
                     self.gk_cur = gamekeylist[self.ui.comList.currentIndex()]
+                    self.get_config()
 
     def bind_clearall(self):
         self.gk_cur.init_buttons()
@@ -394,3 +394,9 @@ class MainUI(QtWidgets.QMainWindow):
         elif srcinput.objectName() == "rLayerD":
             self.activeLayer = 3
         self.gk_cur.update_all_labels(self.activeLayer)
+
+    def togglestick(self):
+        if self.ui.grpThumbStick.isHidden():
+            self.ui.grpThumbStick.show()
+        else:
+            self.ui.grpThumbStick.hide()

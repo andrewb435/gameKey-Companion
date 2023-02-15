@@ -30,6 +30,7 @@ gk_uimap = [
     ["kThumbStickE", "lThumbStickEA", "lThumbStickEB", "lThumbStickEC", "lThumbStickED"],
     ["kThumbStickS", "lThumbStickSA", "lThumbStickSB", "lThumbStickSC", "lThumbStickSD"],
     ["kThumbStickW", "lThumbStickWA", "lThumbStickWB", "lThumbStickWC", "lThumbStickWD"],
-    ["kThumbBAddon", "lThumbBAddonA", "lThumbBAddonB", "lThumbBAddonC", "lThumbBAddonD"],
+    ["kThumbAddon", "lThumbAddonA", "lThumbAddonB", "lThumbAddonC", "lThumbAddonD"],
     ["kThumbStickPush", "lThumbStickPushA", "lThumbStickPushB", "lThumbStickPushC", "lThumbStickPushD"],
+    ["None", "None", "None", "None", "None"]
 ]
