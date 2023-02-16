@@ -303,7 +303,9 @@ gk_hw_commands = {
     "ReportButtonConfig": "gtbu",
     "ReportAxesConfig": "gtax",
     "SetDeviceName": "stna",
-    "SetAxisConfig": "stax"
+    "SetAxisConfig": "stax",
+    "StartCalibration": "stca",
+    "FetchCalibration": "gtca"
 }
 
 gk_colormode = {

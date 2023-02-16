@@ -49,7 +49,7 @@ class GameKey:
         self.buttons.clear()
         for item in self.hwmap:
             if not item[:-1] == "kThumbStick":      # String compare to eliminate thumbstick from the button arrays
-                self.buttons[item] = GkButton(0, 0, 0, 0, 0)     # init GkButton as blank 0 0
+                self.buttons[item] = GkButton(0, 0, 0, 0, 1)     # init GkButton as blank 0 0
 
     def init_axes(self):
         # clear out the axes and append to HW limit
@@ -184,28 +184,22 @@ class GameKey:
                         print(x)
 
     def set_axes(self):
-        if not self.connection.is_open:
-            self.connection.open()
-        for index, axis_cur in enumerate(self.axes):
-            axis_command = "stax "
-            axis_command += str(index)+"="
-            axis_command += str(axis_cur.low) + "&"
-            axis_command += str(axis_cur.center) + "&"
-            axis_command += str(axis_cur.high) + "&"
-            axis_command += str(axis_cur.deadzone) + "&"
-            axis_command += str(axis_cur.key_up) + "&"
-            axis_command += str(axis_cur.key_down) + "&"
-            axis_command += str(axis_cur.analog_mode) + "&"
-            axis_command += str(axis_cur.invert) + "\n"
-            print("sending axis config:", axis_command, end='')
-            line = ""
-            self.connection.write(axis_command.encode('ascii'))
-            time.sleep(0.010)   # 10ms delay to allow serial to flow
-            while self.connection.in_waiting > 0:
-                line += self.connection.readline().decode('ascii', 'ignore')
-            if self.debug:
-                print("Response from axis config", index, ":", line, end='')
-            self.connection.reset_input_buffer()
+        axisbinds = ["", ""]
+        if self.connection:
+            for axis_index, axis in enumerate(self.axes):
+                axisbinds[axis_index] = \
+                    str(axis_index) + "="\
+                    + str(axis.low) + "&"\
+                    + str(axis.center) + "&"\
+                    + str(axis.high) + "&"\
+                    + str(axis.deadzone) + "&"\
+                    + str(axis.key_up) + "&"\
+                    + str(axis.key_down) + "&"\
+                    + str(int(axis.analog_mode)) + "&"\
+                    + str(int(axis.invert))
+            for line in axisbinds:
+                cmd = gk_data.gk_hw_commands['SetAxisConfig'] + " " + line
+                self.connection.commandsend(cmd)
 
     def set_eeprom(self):
         if not self.connection.is_open:

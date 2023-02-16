@@ -4,9 +4,9 @@ class GkStickAxis:
         self.low = 0
         self.center = 511
         self.high = 1023
-        self.deadzone = 0
-        self.analog_mode = False
-        self.invert = False
+        self.deadzone = 200
+        self.analog_mode = 0
+        self.invert = 0
         self.rawvalue = 0
 
     def map_json(self, gk_axisdata):
@@ -39,9 +39,9 @@ class GkStick:
             axis.low = 0
             axis.center = 511
             axis.high = 1023
-            axis.analog_mode = False
-            axis.invert = False
-            axis.deadzone = 20
+            axis.analog_mode = 0
+            axis.invert = 0
+            axis.deadzone = 200
 
     def map_json(self, gk_stickdata):
         for axis_index in gk_stickdata['axes']:

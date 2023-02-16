@@ -311,6 +311,7 @@ class MainUI(QtWidgets.QMainWindow):
 
     def set_config(self):
         self.gk_cur.set_buttons()
+        self.gk_cur.set_axes()
 
     def bind_window(self):
         srcinput = self.sender()
@@ -417,6 +418,8 @@ class MainUI(QtWidgets.QMainWindow):
             self.stickui.profile_input(currentstick, self.profile_data.load_stick_profile(currentstick))
 
         self.stickui.profile_ctrl = self.profile_data
+        if self.gk_cur.connection:
+            self.stickui.serial_ctrl = self.gk_cur.connection
         self.stickui.stick_data_return.connect(self.profile_stick_return)
         self.stickui.show()
 

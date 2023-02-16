@@ -21,18 +21,21 @@ class StickUI(QtWidgets.QWidget):
         self.stick = GkStick()
         self.stick_profile = None
         self.profile_ctrl = None
+        self.serial_ctrl = None
 
-        # Analog Axes
+        # Function buttons
         self.ui.bSaveStickAs.clicked.connect(self.stick_save_as)
         self.ui.bSaveStick.clicked.connect(self.stick_save)
         self.ui.bResetStick.clicked.connect(self.stick_reset)
         self.ui.bCancel.clicked.connect(self.cancel)
+        self.ui.bCalibrateStart.clicked.connect(self.start_calibration)
+        self.ui.bCalibrateFetch.clicked.connect(self.fetch_calibration)
+
+        # Analog Axes
         self.ui.iXInvert.clicked.connect(self.axis_invert)
         self.ui.iYInvert.clicked.connect(self.axis_invert)
-        self.ui.radioXModeAnalog.clicked.connect(self.axis_mode)
-        self.ui.radioXModeDigital.clicked.connect(self.axis_mode)
-        self.ui.radioYModeAnalog.clicked.connect(self.axis_mode)
-        self.ui.radioYModeDigital.clicked.connect(self.axis_mode)
+        self.ui.radioModeAnalog.clicked.connect(self.axis_mode)
+        self.ui.radioModeDigital.clicked.connect(self.axis_mode)
 
         # Deadzone dial
         self.ui.dialXdz.valueChanged.connect(self.update_dz)
@@ -50,10 +53,8 @@ class StickUI(QtWidgets.QWidget):
         self.ui.dialYdz.valueChanged.connect(self.axis_dz_changed)
 
         # Thumbstick mode color indicators
-        self.ui.radioXModeDigital.setStyleSheet(gk_data.gk_colormode[1])
-        self.ui.radioXModeAnalog.setStyleSheet(gk_data.gk_colormode[2])
-        self.ui.radioYModeDigital.setStyleSheet(gk_data.gk_colormode[1])
-        self.ui.radioYModeAnalog.setStyleSheet(gk_data.gk_colormode[2])
+        self.ui.radioModeDigital.setStyleSheet(gk_data.gk_colormode[1])
+        self.ui.radioModeAnalog.setStyleSheet(gk_data.gk_colormode[2])
 
     def update_dz(self):
         self.ui.oXdz.setText(str(self.ui.dialXdz.value()))
@@ -62,6 +63,12 @@ class StickUI(QtWidgets.QWidget):
     def update_labels(self):
         # Name
         self.ui.lName.setText(self.stick.name)
+        # Stick Mode
+        if int(self.stick.axes[0].analog_mode) == 0:
+            self.ui.radioModeDigital.setChecked(True)
+        else:
+            self.ui.radioModeAnalog.setChecked(True)
+
         # X Axis
         self.ui.sliderXrange.setValue(
             (
@@ -75,11 +82,6 @@ class StickUI(QtWidgets.QWidget):
             self.ui.iXInvert.setChecked(True)
         else:
             self.ui.iXInvert.setChecked(False)
-        # X Mode
-        if int(self.stick.axes[0].analog_mode) == 0:
-            self.ui.radioXModeDigital.setChecked(True)
-        else:
-            self.ui.radioXModeAnalog.setChecked(True)
 
         # Y Axis
         self.ui.sliderYrange.setValue(
@@ -94,12 +96,6 @@ class StickUI(QtWidgets.QWidget):
             self.ui.iYInvert.setChecked(True)
         else:
             self.ui.iYInvert.setChecked(False)
-        # Y Mode
-        if int(self.stick.axes[1].analog_mode) == 0:
-            self.ui.radioYModeDigital.setChecked(True)
-        else:
-            self.ui.radioYModeAnalog.setChecked(True)
-
         # Deadzone dial
         self.ui.dialXdz.setValue(int(self.stick.axes[0].deadzone))
         self.ui.oXdz.setText(str(self.stick.axes[0].deadzone))
@@ -131,8 +127,8 @@ class StickUI(QtWidgets.QWidget):
             self.stick.axes[1].invert = int(self.ui.iYInvert.isChecked())
 
     def axis_mode(self):
-        self.stick.axes[0].analog_mode = int(self.ui.radioXModeAnalog.isChecked())
-        self.stick.axes[1].analog_mode = int(self.ui.radioYModeAnalog.isChecked())
+        self.stick.axes[0].analog_mode = int(self.ui.radioModeAnalog.isChecked())
+        self.stick.axes[1].analog_mode = int(self.ui.radioModeAnalog.isChecked())
 
     def axis_limits_changed(self):
         inputbtn = self.sender()
@@ -190,3 +186,25 @@ class StickUI(QtWidgets.QWidget):
 
     def cancel(self):
         self.close()
+
+    def start_calibration(self):
+        if self.serial_ctrl:
+            self.serial_ctrl.commandsend(gk_data.gk_hw_commands['StartCalibration'])
+
+    def fetch_calibration(self):
+        if self.serial_ctrl:
+            result = self.serial_ctrl.commandsend(gk_data.gk_hw_commands['FetchCalibration'])[0]
+            self.parse_calibration(result)
+
+    def parse_calibration(self, result):
+        if result is not None:
+            for axis in result.split("|"):
+                data = axis.split("=")
+                axis_index = data[0]
+                axis_data = data[1].split("&")
+                self.stick.axes[int(axis_index)].low = axis_data[0]
+                self.stick.axes[int(axis_index)].center = axis_data[1]
+                self.stick.axes[int(axis_index)].high = axis_data[2]
+                self.update_labels()
+        else:
+            print("Communication error")
