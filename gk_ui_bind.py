@@ -1,9 +1,8 @@
 from ui_bind import Ui_windowBind
 from PyQt5 import QtWidgets as QtW
 from PyQt5 import QtCore as QtC
-import gk_gameKey
-import gk_data
-import gk_helpers
+import gk_data_tables
+import gk_helper_converts
 
 
 class BindUI(QtW.QWidget):
@@ -66,11 +65,11 @@ class BindUI(QtW.QWidget):
         self.ui.bShiftLayerD.clicked.connect(self.keyoverride)
 
         # Set up some button details
-        self.ui.bShiftLayerA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.bShiftLayerB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.bShiftLayerC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.bShiftLayerD.setStyleSheet(gk_data.gk_layercolor[3])
-        # self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[currentkeymode])
+        self.ui.bShiftLayerA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.bShiftLayerB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.bShiftLayerC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.bShiftLayerD.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        # self.bindui.ui.keyBindingIndicator.setStyleSheet(gk_data_tables.gk_colormode[currentkeymode])
 
     def bind_data_in(self, buttontobind, currentkeybinds_in, currentkeymode_in, currentlayer_in):
         self.buttonname = buttontobind
@@ -84,15 +83,16 @@ class BindUI(QtW.QWidget):
         self.labelupdate()
 
     def labelupdate(self):
-        self.ui.keyBindingIndicator.setText(gk_helpers.map_ard_to_txt(self.newbind))
+        self.ui.keyBindingIndicator.setText(gk_helper_converts.map_ard_to_txt(self.newbind))
         self.layerlabel()
 
     def layerlabel(self):
-        self.ui.buttonLayerIndicator.setText(gk_data.gk_layername[self.newlayer])
+        self.ui.buttonLayerIndicator.setText(gk_data_tables.gk_layername[self.newlayer])
         if self.currentlayer == self.newlayer:
-            self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.newlayer])
+            self.ui.buttonLayerIndicator.setStyleSheet(gk_data_tables.gk_layercolor[self.newlayer])
         else:
-            self.ui.buttonLayerIndicator.setStyleSheet(gk_data.gk_layercolor[self.newlayer] + gk_data.gk_layercolor[99])
+            self.ui.buttonLayerIndicator.setStyleSheet(gk_data_tables.gk_layercolor[self.newlayer]
+                                                       + gk_data_tables.gk_layercolor[99])
 
     def clearbind(self):
         # clears current self.newbind and updates label
@@ -121,33 +121,33 @@ class BindUI(QtW.QWidget):
                 senderbtn.text() == "LayerC" or \
                 senderbtn.text() == "LayerD":
             self.newlayer = 0
-            self.newmode = gk_data.gk_hw_keymode["LAYER"]
+            self.newmode = gk_data_tables.gk_hw_keymode["LAYER"]
         else:
             self.newlayer = self.currentlayer
-            self.newmode = gk_data.gk_hw_keymode["KEYB"]
+            self.newmode = gk_data_tables.gk_hw_keymode["KEYB"]
 
-        self.newbind = gk_helpers.map_txt_to_ard(senderbtn.text())
+        self.newbind = gk_helper_converts.map_txt_to_ard(senderbtn.text())
         self.labelupdate()
         print("special key override", self.newbind)
 
     def modeset(self):
         senderbtn = self.sender()
-        self.ui.keyBindingIndicator.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[senderbtn.text()]])
-        self.newmode = gk_data.gk_hw_keymode[senderbtn.text()]
+        self.ui.keyBindingIndicator.setStyleSheet(gk_data_tables.gk_colormode[gk_data_tables.gk_hw_keymode[senderbtn.text()]])
+        self.newmode = gk_data_tables.gk_hw_keymode[senderbtn.text()]
 
     def translate_numpad(self, incomingbind):
         outgoingbind = None
         return outgoingbind
 
     def keyPressEvent(self, event):
-        keyholder = gk_helpers.map_qt_to_ard(event.key())
+        keyholder = gk_helper_converts.map_qt_to_ard(event.key())
         if not ((event.key() == QtC.Qt.Key_Shift)
                 or (event.key() == QtC.Qt.Key_Control)
                 or (event.key() == QtC.Qt.Key_Alt)):
             self.getmodifiers(event)
             if keyholder is not None:
                 if self.mod_keypad:
-                    self.newbind = gk_helpers.map_numpad_to_ard(keyholder)
+                    self.newbind = gk_helper_converts.map_numpad_to_ard(keyholder)
                 elif 65 <= keyholder <= 90 and not self.mod_shift:
                     self.newbind = keyholder + 32
                 else:

@@ -2,8 +2,8 @@ import os
 from ui_stick import Ui_windowStick
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
-import gk_data
-from gk_gkstick import GkStick
+import gk_data_tables
+from gk_gameKey_stick import GkStick
 
 
 class StickUI(QtWidgets.QWidget):
@@ -53,8 +53,8 @@ class StickUI(QtWidgets.QWidget):
         self.ui.dialYdz.valueChanged.connect(self.axis_dz_changed)
 
         # Thumbstick mode color indicators
-        self.ui.radioModeDigital.setStyleSheet(gk_data.gk_colormode[1])
-        self.ui.radioModeAnalog.setStyleSheet(gk_data.gk_colormode[2])
+        self.ui.radioModeDigital.setStyleSheet(gk_data_tables.gk_colormode[1])
+        self.ui.radioModeAnalog.setStyleSheet(gk_data_tables.gk_colormode[2])
 
     def update_dz(self):
         self.ui.oXdz.setText(str(self.ui.dialXdz.value()))
@@ -189,11 +189,11 @@ class StickUI(QtWidgets.QWidget):
 
     def start_calibration(self):
         if self.serial_ctrl:
-            self.serial_ctrl.commandsend(gk_data.gk_hw_commands['StartCalibration'])
+            self.serial_ctrl.commandsend(gk_data_tables.gk_hw_commands['StartCalibration'])
 
     def fetch_calibration(self):
         if self.serial_ctrl:
-            result = self.serial_ctrl.commandsend(gk_data.gk_hw_commands['FetchCalibration'])[0]
+            result = self.serial_ctrl.commandsend(gk_data_tables.gk_hw_commands['FetchCalibration'])[0]
             self.parse_calibration(result)
 
     def parse_calibration(self, result):

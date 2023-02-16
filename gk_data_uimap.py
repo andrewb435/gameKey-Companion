@@ -1,4 +1,4 @@
-gk_uimap = [
+gk_uimap_button = [
     ["kPinky1", "lPinkyA1", "lPinkyB1", "lPinkyC1", "lPinkyD1"],
     ["kPinky2", "lPinkyA2", "lPinkyB2", "lPinkyC2", "lPinkyD2"],
     ["kPinky3", "lPinkyA3", "lPinkyB3", "lPinkyC3", "lPinkyD3"],
@@ -26,11 +26,12 @@ gk_uimap = [
     ["kThumbNavDown", "lThumbNavDownA", "lThumbNavDownB", "lThumbNavDownC", "lThumbNavDownD"],
     ["kThumbNavBack", "lThumbNavBackA", "lThumbNavBackB", "lThumbNavBackC", "lThumbNavBackD"],
     ["kThumbNavPush", "lThumbNavPushA", "lThumbNavPushB", "lThumbNavPushC", "lThumbNavPushD"],
-    ["kThumbStickUp", "kThumbStickStickUp", "kThumbStickStickUp", "kThumbStickStickUp", "kThumbStickStickUp"],
-    ["kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd", "kThumbStickFwd"],
-    ["kThumbStickDown", "kThumbStickDown", "kThumbStickDown", "kThumbStickDown", "kThumbStickDown"],
-    ["kThumbStickBack", "kThumbStickBack", "kThumbStickBack", "kThumbStickBack", "kThumbStickBack"],
     ["kThumbAddon", "lThumbAddonA", "lThumbAddonB", "lThumbAddonC", "lThumbAddonD"],
     ["kThumbStickPush", "kThumbStickPush", "kThumbStickPush", "kThumbStickPush", "kThumbStickPush"],
     ["None", "None", "None", "None", "None"]
+]
+
+gk_uimap_analog = [
+    [0, "kThumbStickUp", "kThumbStickDown"],
+    [1, "kThumbStickFwd", "kThumbStickBack"]
 ]

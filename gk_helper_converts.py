@@ -1,4 +1,4 @@
-import gk_data
+import gk_data_tables
 
 
 def map_txt_to_ard(name_in):
@@ -17,13 +17,13 @@ def map_qt_to_ard(hex_in):
 
 
 def map_numpad_to_ard(map_in):
-    for numkey in gk_data.gk_numpadascii:
+    for numkey in gk_data_tables.gk_numpadascii:
         if numkey[1] == map_in:
             return numkey[0]
 
 
 def _map_to_data(index_in, index_out, map_in):
     # Map arbitrary columns in gk_arduinoascii
-    for binding in gk_data.gk_arduinoascii:
+    for binding in gk_data_tables.gk_arduinoascii:
         if binding[index_in] == map_in:
             return binding[index_out]

@@ -1,3 +1,7 @@
+from PyQt5 import QtWidgets
+from gk_data_uimap import gk_uimap_analog as uimap
+
+
 class GkAxis:
     def __init__(self):
         self.low = 0
@@ -9,6 +13,8 @@ class GkAxis:
         self.analog_mode = 0
         self.invert = 0
         self.rawvalue = 0
+        self.label_up = None
+        self.label_down = None
 
     def map_json(self, gk_axisdata):
         self.low = gk_axisdata['low']
@@ -19,6 +25,11 @@ class GkAxis:
         self.key_down = gk_axisdata['key_down']
         self.analog_mode = gk_axisdata['analog_mode']
         self.invert = gk_axisdata['invert']
+
+    def map_label(self, ui_in, axis_index):
+        uimap_data = uimap[axis_index]
+        self.label_up = ui_in.findChild(QtWidgets.QLabel, uimap_data[1])
+        self.label_down = ui_in.findChild(QtWidgets.QLabel, uimap_data[2])
 
     def load_stickdata(self, stickdata):
         self.low = stickdata['low']

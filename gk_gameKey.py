@@ -1,12 +1,9 @@
 import time
-from PyQt5 import QtWidgets
-import gk_data
-from gk_data import gk_hw_commands as hwcommands
-import gk_serial
-from gk_gkbutton import GkButton
-from gk_gkaxis import GkAxis
-from gk_uimap import gk_uimap as uimap
-import gk_profiles
+import gk_data_tables
+from gk_data_tables import gk_hw_commands as hwcommands
+import gk_helper_serial
+from gk_gameKey_button import GkButton
+from gk_gameKey_axis import GkAxis
 
 
 class GkProfileData:
@@ -22,7 +19,7 @@ class GameKey:
         self.axes = []  # GkAxis index is hw position, value is object
         self.axiscount = 2  # hw axis count
         if not comport == -1:
-            self.connection = gk_serial.GkSerial(comport)
+            self.connection = gk_helper_serial.GkSerial(comport)
         else:
             self.connection = None
         self.remotebutton = None
@@ -81,10 +78,10 @@ class GameKey:
     def parse_hwmap(self):
         if self.hand:   # true is a gk for the right hand, false for left
             print("detected right hand")
-            self.hwmap = gk_data.gk_hw_righthand
+            self.hwmap = gk_data_tables.gk_hw_righthand
         else:
             print("detected left hand")
-            self.hwmap = gk_data.gk_hw_lefthand
+            self.hwmap = gk_data_tables.gk_hw_lefthand
 
     def get_config(self):
         self.get_buttons()
@@ -198,7 +195,7 @@ class GameKey:
                     + str(int(axis.analog_mode)) + "&"\
                     + str(int(axis.invert))
             for line in axisbinds:
-                cmd = gk_data.gk_hw_commands['SetAxisConfig'] + " " + line
+                cmd = gk_data_tables.gk_hw_commands['SetAxisConfig'] + " " + line
                 self.connection.commandsend(cmd)
 
     def set_eeprom(self):
@@ -232,17 +229,10 @@ class GameKey:
         return exportblock
 
     def map_button_labels(self, ui_in):
-        ui = ui_in
-        button_uimap_index = None
         for button in self.buttons:
-            for index, sublist in enumerate(uimap):
-                if button in sublist:
-                    button_uimap_index = index
-                    break
-            self.buttons[button].label_a = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][1])
-            self.buttons[button].label_b = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][2])
-            self.buttons[button].label_c = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][3])
-            self.buttons[button].label_d = ui.findChild(QtWidgets.QLabel, uimap[button_uimap_index][4])
+            self.buttons[button].map_label(ui_in, button)
+        for index, axis in enumerate(self.axes):
+            self.axes[index].map_label(ui_in, index)
 
     def map_json(self, gkconfig_in):
         self.stick_config = gkconfig_in['stick_config']

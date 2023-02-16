@@ -2,7 +2,6 @@ import os
 import pathlib
 import platform
 import json
-from PyQt5.QtWidgets import QFileDialog
 
 
 class GkProfileList:

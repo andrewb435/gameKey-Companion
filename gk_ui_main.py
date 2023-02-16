@@ -1,17 +1,16 @@
 from ui_main import Ui_windowMain
 from PyQt5 import QtWidgets
-import gk_serial
-from gk_bind import BindUI
-from gk_stick import StickUI
+import gk_helper_serial
+from gk_ui_bind import BindUI
+from gk_ui_stick import StickUI
 import gk_gameKey
-import gk_profiles
-import gk_helpers
-import gk_gkstick
+import gk_gameKey_profiles
+import gk_helper_converts
 
 # Serial
 import serial.tools.list_ports
 import serial
-import gk_data
+import gk_data_tables
 
 # Global gameKey list
 gamekeylist = []
@@ -39,7 +38,7 @@ class MainUI(QtWidgets.QMainWindow):
 
         # Profile setup
         self.ui.bConfigRefresh.clicked.connect(self.profile_gamepad_refresh)
-        self.profile_data = gk_profiles.GkProfileList()
+        self.profile_data = gk_gameKey_profiles.GkProfileList()
         self.ui.bConfigSave.clicked.connect(self.profile_save)
         self.ui.bConfigLoad.clicked.connect(self.profile_load)
         self.profile_gamepad_refresh()
@@ -120,153 +119,159 @@ class MainUI(QtWidgets.QMainWindow):
 
     def init_colors(self):
         # Set up label color indicators
-        self.ui.lKEYBColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lKEYBColor.text()]])
-        self.ui.lGPADColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lGPADColor.text()]])
-        self.ui.lBOTHColor.setStyleSheet(gk_data.gk_colormode[gk_data.gk_hw_keymode[self.ui.lBOTHColor.text()]])
+        self.ui.lKEYBColor.setStyleSheet(gk_data_tables.gk_colormode[
+                                             gk_data_tables.gk_hw_keymode[self.ui.lKEYBColor.text()]
+                                         ])
+        self.ui.lGPADColor.setStyleSheet(gk_data_tables.gk_colormode[
+                                             gk_data_tables.gk_hw_keymode[self.ui.lGPADColor.text()]
+                                         ])
+        self.ui.lBOTHColor.setStyleSheet(gk_data_tables.gk_colormode[
+                                             gk_data_tables.gk_hw_keymode[self.ui.lBOTHColor.text()]
+                                         ])
 
         # Layer Selector
-        self.ui.rLayerA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.rLayerB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.rLayerC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.rLayerD.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.rLayerA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.rLayerB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.rLayerC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.rLayerD.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
         # Pinky
         # Layer 0 / A
-        self.ui.lPinkyA1.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lPinkyA2.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lPinkyA3.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lPinkyA4.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lPinkyA5.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lPinkyAAddon.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.lPinkyA1.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lPinkyA2.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lPinkyA3.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lPinkyA4.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lPinkyA5.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lPinkyAAddon.setStyleSheet(gk_data_tables.gk_layercolor[0])
         # Layer 1 / B
-        self.ui.lPinkyB1.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lPinkyB2.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lPinkyB3.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lPinkyB4.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lPinkyB5.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lPinkyBAddon.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.lPinkyB1.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lPinkyB2.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lPinkyB3.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lPinkyB4.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lPinkyB5.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lPinkyBAddon.setStyleSheet(gk_data_tables.gk_layercolor[1])
         # Layer 2 / C
-        self.ui.lPinkyC1.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lPinkyC2.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lPinkyC3.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lPinkyC4.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lPinkyC5.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lPinkyCAddon.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.lPinkyC1.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lPinkyC2.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lPinkyC3.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lPinkyC4.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lPinkyC5.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lPinkyCAddon.setStyleSheet(gk_data_tables.gk_layercolor[2])
         # Layer 3 / D
-        self.ui.lPinkyD1.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lPinkyD2.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lPinkyD3.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lPinkyD4.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lPinkyD5.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lPinkyDAddon.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.lPinkyD1.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lPinkyD2.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lPinkyD3.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lPinkyD4.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lPinkyD5.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lPinkyDAddon.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
         # Ring
         # Layer 0 / A
-        self.ui.lRingA1.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lRingA2.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lRingA3.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lRingA4.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lRingA5.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.lRingA1.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lRingA2.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lRingA3.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lRingA4.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lRingA5.setStyleSheet(gk_data_tables.gk_layercolor[0])
         # Layer 1 / B
-        self.ui.lRingB1.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lRingB2.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lRingB3.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lRingB4.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lRingB5.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.lRingB1.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lRingB2.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lRingB3.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lRingB4.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lRingB5.setStyleSheet(gk_data_tables.gk_layercolor[1])
         # Layer 2 / C
-        self.ui.lRingC1.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lRingC2.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lRingC3.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lRingC4.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lRingC5.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.lRingC1.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lRingC2.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lRingC3.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lRingC4.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lRingC5.setStyleSheet(gk_data_tables.gk_layercolor[2])
         # Layer 3 / D
-        self.ui.lRingD1.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lRingD2.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lRingD3.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lRingD4.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lRingD5.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.lRingD1.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lRingD2.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lRingD3.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lRingD4.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lRingD5.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
         # Middle
         # Layer 0 / A
-        self.ui.lMiddleA1.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lMiddleA2.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lMiddleA3.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lMiddleA4.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lMiddleA5.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.lMiddleA1.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lMiddleA2.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lMiddleA3.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lMiddleA4.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lMiddleA5.setStyleSheet(gk_data_tables.gk_layercolor[0])
         # Layer 1 / B
-        self.ui.lMiddleB1.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lMiddleB2.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lMiddleB3.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lMiddleB4.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lMiddleB5.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.lMiddleB1.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lMiddleB2.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lMiddleB3.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lMiddleB4.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lMiddleB5.setStyleSheet(gk_data_tables.gk_layercolor[1])
         # Layer 2 / C
-        self.ui.lMiddleC1.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lMiddleC2.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lMiddleC3.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lMiddleC4.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lMiddleC5.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.lMiddleC1.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lMiddleC2.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lMiddleC3.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lMiddleC4.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lMiddleC5.setStyleSheet(gk_data_tables.gk_layercolor[2])
         # Layer 3 / D
-        self.ui.lMiddleD1.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lMiddleD2.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lMiddleD3.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lMiddleD4.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lMiddleD5.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.lMiddleD1.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lMiddleD2.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lMiddleD3.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lMiddleD4.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lMiddleD5.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
         # Index
         # Layer 0 / A
-        self.ui.lIndexA1.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lIndexA2.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lIndexA3.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lIndexA4.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lIndexA5.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lIndexAAddon.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.lIndexA1.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lIndexA2.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lIndexA3.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lIndexA4.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lIndexA5.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lIndexAAddon.setStyleSheet(gk_data_tables.gk_layercolor[0])
         # Layer 1 / B
-        self.ui.lIndexB1.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lIndexB2.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lIndexB3.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lIndexB4.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lIndexB5.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lIndexBAddon.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.lIndexB1.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lIndexB2.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lIndexB3.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lIndexB4.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lIndexB5.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lIndexBAddon.setStyleSheet(gk_data_tables.gk_layercolor[1])
         # Layer 2 / C
-        self.ui.lIndexC1.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lIndexC2.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lIndexC3.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lIndexC4.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lIndexC5.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lIndexCAddon.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.lIndexC1.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lIndexC2.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lIndexC3.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lIndexC4.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lIndexC5.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lIndexCAddon.setStyleSheet(gk_data_tables.gk_layercolor[2])
         # Layer 3 / D
-        self.ui.lIndexD1.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lIndexD2.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lIndexD3.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lIndexD4.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lIndexD5.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lIndexDAddon.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.lIndexD1.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lIndexD2.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lIndexD3.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lIndexD4.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lIndexD5.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lIndexDAddon.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
         # Thumb Nav
         # Layer 0 / A
-        self.ui.lThumbNavUpA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lThumbNavFwdA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lThumbNavDownA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lThumbNavBackA.setStyleSheet(gk_data.gk_layercolor[0])
-        self.ui.lThumbNavPushA.setStyleSheet(gk_data.gk_layercolor[0])
+        self.ui.lThumbNavUpA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lThumbNavFwdA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lThumbNavDownA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lThumbNavBackA.setStyleSheet(gk_data_tables.gk_layercolor[0])
+        self.ui.lThumbNavPushA.setStyleSheet(gk_data_tables.gk_layercolor[0])
         # Layer 1 / B
-        self.ui.lThumbNavUpB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lThumbNavFwdB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lThumbNavDownB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lThumbNavBackB.setStyleSheet(gk_data.gk_layercolor[1])
-        self.ui.lThumbNavPushB.setStyleSheet(gk_data.gk_layercolor[1])
+        self.ui.lThumbNavUpB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lThumbNavFwdB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lThumbNavDownB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lThumbNavBackB.setStyleSheet(gk_data_tables.gk_layercolor[1])
+        self.ui.lThumbNavPushB.setStyleSheet(gk_data_tables.gk_layercolor[1])
         # Layer 2 / C
-        self.ui.lThumbNavUpC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lThumbNavFwdC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lThumbNavDownC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lThumbNavBackC.setStyleSheet(gk_data.gk_layercolor[2])
-        self.ui.lThumbNavPushC.setStyleSheet(gk_data.gk_layercolor[2])
+        self.ui.lThumbNavUpC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lThumbNavFwdC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lThumbNavDownC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lThumbNavBackC.setStyleSheet(gk_data_tables.gk_layercolor[2])
+        self.ui.lThumbNavPushC.setStyleSheet(gk_data_tables.gk_layercolor[2])
         # Layer 3 / D
-        self.ui.lThumbNavUpD.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lThumbNavFwdD.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lThumbNavDownD.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lThumbNavBackD.setStyleSheet(gk_data.gk_layercolor[3])
-        self.ui.lThumbNavPushD.setStyleSheet(gk_data.gk_layercolor[3])
+        self.ui.lThumbNavUpD.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lThumbNavFwdD.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lThumbNavDownD.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lThumbNavBackD.setStyleSheet(gk_data_tables.gk_layercolor[3])
+        self.ui.lThumbNavPushD.setStyleSheet(gk_data_tables.gk_layercolor[3])
 
     def get_serial(self):
         comports = list(serial.tools.list_ports.comports())
@@ -276,11 +281,10 @@ class MainUI(QtWidgets.QMainWindow):
         if len(comports) > 0:
             self.ui.comList.clear()
             gamekeylist.clear()
-            counter = 0
             for x in comports:
                 print("Trying device " + x.device)
-                device = gk_serial.GkSerial(x.device)
-                cmd = gk_data.gk_hw_commands["DeviceInfo"]
+                device = gk_helper_serial.GkSerial(x.device)
+                cmd = gk_data_tables.gk_hw_commands["DeviceInfo"]
                 result = device.commandsend(cmd)
                 if result:
                     result = result[0]
@@ -352,19 +356,19 @@ class MainUI(QtWidgets.QMainWindow):
             self.gk_cur.buttons[newbutton].button_bind_a = newkeybind
             self.gk_cur.buttons[newbutton].set_special_button(newkeybind)
             self.gk_cur.buttons[newbutton].set_button_mode(newkeymode)
-            self.ui.kThumbStickPush.setText(gk_helpers.map_ard_to_txt(newkeybind))
+            self.ui.kThumbStickPush.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         elif newbutton == 'kThumbStickUp':
             self.gk_cur.axes[0].key_up = newkeybind
-            self.ui.kThumbStickUp.setText(gk_helpers.map_ard_to_txt(newkeybind))
+            self.ui.kThumbStickUp.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         elif newbutton == 'kThumbStickDown':
             self.gk_cur.axes[0].key_down = newkeybind
-            self.ui.kThumbStickDown.setText(gk_helpers.map_ard_to_txt(newkeybind))
+            self.ui.kThumbStickDown.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         elif newbutton == 'kThumbStickFwd':
             self.gk_cur.axes[1].key_up = newkeybind
-            self.ui.kThumbStickFwd.setText(gk_helpers.map_ard_to_txt(newkeybind))
+            self.ui.kThumbStickFwd.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         elif newbutton == 'kThumbStickBack':
             self.gk_cur.axes[1].key_down = newkeybind
-            self.ui.kThumbStickBack.setText(gk_helpers.map_ard_to_txt(newkeybind))
+            self.ui.kThumbStickBack.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         print("new special btn ", str(newbutton), " key", str(newkeybind), " mode", str(newkeymode))
 
     def save_eeprom(self):
