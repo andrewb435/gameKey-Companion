@@ -27,6 +27,8 @@ class MainUI(QtWidgets.QMainWindow):
 
         # Binding UI setup
         self.bindui = BindUI()
+
+        # Stick Settings UI setup
         self.stickui = StickUI()
 
         # gk_cur setup
@@ -36,13 +38,19 @@ class MainUI(QtWidgets.QMainWindow):
         # label colors
         self.init_colors()
 
-        # Profile setup
-        self.ui.bConfigRefresh.clicked.connect(self.profile_gamepad_refresh)
+        # UI button bindings
+        self.init_bindings()
+
+        # Profile loading
         self.profile_data = gk_gameKey_profiles.GkProfileList()
-        self.ui.bConfigSave.clicked.connect(self.profile_save)
-        self.ui.bConfigLoad.clicked.connect(self.profile_load)
         self.profile_gamepad_refresh()
         self.profile_stick_refresh()
+
+    def init_bindings(self):
+        # Profile setup
+        self.ui.bConfigRefresh.clicked.connect(self.profile_gamepad_refresh)
+        self.ui.bConfigSave.clicked.connect(self.profile_save)
+        self.ui.bConfigLoad.clicked.connect(self.profile_load)
         self.ui.bConfigSaveAs.clicked.connect(self.profile_saveas)
 
         # Stick profile setup
@@ -62,11 +70,7 @@ class MainUI(QtWidgets.QMainWindow):
         self.ui.rLayerB.clicked.connect(self.change_layer)
         self.ui.rLayerC.clicked.connect(self.change_layer)
         self.ui.rLayerD.clicked.connect(self.change_layer)
-        self.activeLayer = 0
 
-        '''
-        Button Bind actions
-        '''
         # Pinky
         self.ui.kPinky1.clicked.connect(self.bind_window)
         self.ui.kPinky2.clicked.connect(self.bind_window)
@@ -297,7 +301,7 @@ class MainUI(QtWidgets.QMainWindow):
 
     def get_config(self):
         self.gk_cur.get_config()
-        self.gk_cur.map_button_labels(self)
+        self.gk_cur.map_labels(self)
         self.gk_cur.update_all_labels(self.activeLayer)
         self.profile_stick_return(self.gk_cur.stick_config)
 

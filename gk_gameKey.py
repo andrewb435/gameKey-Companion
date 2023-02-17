@@ -228,7 +228,7 @@ class GameKey:
             exportblock["axes"][str(axis_index)] = axis.get_json()
         return exportblock
 
-    def map_button_labels(self, ui_in):
+    def map_labels(self, ui_in):
         for button in self.buttons:
             self.buttons[button].map_label(ui_in, button)
         for index, axis in enumerate(self.axes):
@@ -250,3 +250,5 @@ class GameKey:
     def update_all_labels(self, active_layer_in):
         for button in self.buttons:
             self.buttons[button].update_label(active_layer_in)
+        for axis_index, axis in enumerate(self.axes):
+            self.axes[axis_index].update_label()
