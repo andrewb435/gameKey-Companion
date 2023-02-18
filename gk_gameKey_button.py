@@ -54,16 +54,31 @@ class GkButton:
             self.button_bind_c = bind_in
         if activelayer_in == 3:
             self.button_bind_d = bind_in
+        self.button_mode = self.check_mode()
         self.update_label_singleton()
 
     def set_special_button(self, bind_in):
         self.button_bind_a = bind_in
+        self.button_mode = self.check_mode()
 
     def get_button_mode(self):
         return self.button_mode
 
-    def set_button_mode(self, mode_in):
-        self.button_mode = mode_in
+    def check_mode(self):
+        lowrange = gk_helper_converts.map_txt_to_ard("LayerD")
+        highrange = gk_helper_converts.map_txt_to_ard("LayerA")
+        if (lowrange <= self.button_bind_a <= highrange
+                or lowrange <= self.button_bind_b <= highrange
+                or lowrange <= self.button_bind_c <= highrange
+                or lowrange <= self.button_bind_d <= highrange):
+            return gk_data_tables.gk_hw_keymode["LAYER"]
+        elif (self.button_bind_a != 0
+              or self.button_bind_b != 0
+              or self.button_bind_c != 0
+              or self.button_bind_d != 0):
+            return gk_data_tables.gk_hw_keymode["KEYB"]
+        else:
+            return gk_data_tables.gk_hw_keymode["NONE"]
 
     def get_json(self):
         export_button = {

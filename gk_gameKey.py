@@ -199,18 +199,10 @@ class GameKey:
                 self.connection.commandsend(cmd)
 
     def set_eeprom(self):
-        if not self.connection.is_open:
-            self.connection.open()
-        print("saving to device memory")
-        line = ""
-        self.connection.write("savnv\n".encode('ascii'))
-        time.sleep(0.010)  # 10ms delay to allow serial to flow
-        while self.connection.in_waiting > 0:
-            line += self.connection.readline().decode('ascii', 'ignore')
+        line = self.connection.commandsend(gk_data_tables.gk_hw_commands['SaveEEPROM'])
         if self.debug:
             print("Response from saving to device memory:", end='')
         print(line, end='')
-        self.connection.reset_input_buffer()
 
     def reset_axes_limits(self):
         for axis in self.axes:

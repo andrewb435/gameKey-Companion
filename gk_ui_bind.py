@@ -121,23 +121,12 @@ class BindUI(QtW.QWidget):
                 senderbtn.text() == "LayerC" or \
                 senderbtn.text() == "LayerD":
             self.newlayer = 0
-            self.newmode = gk_data_tables.gk_hw_keymode["LAYER"]
         else:
             self.newlayer = self.currentlayer
-            self.newmode = gk_data_tables.gk_hw_keymode["KEYB"]
 
         self.newbind = gk_helper_converts.map_txt_to_ard(senderbtn.text())
         self.labelupdate()
         print("special key override", self.newbind)
-
-    def modeset(self):
-        senderbtn = self.sender()
-        self.ui.keyBindingIndicator.setStyleSheet(gk_data_tables.gk_colormode[gk_data_tables.gk_hw_keymode[senderbtn.text()]])
-        self.newmode = gk_data_tables.gk_hw_keymode[senderbtn.text()]
-
-    def translate_numpad(self, incomingbind):
-        outgoingbind = None
-        return outgoingbind
 
     def keyPressEvent(self, event):
         keyholder = gk_helper_converts.map_qt_to_ard(event.key())

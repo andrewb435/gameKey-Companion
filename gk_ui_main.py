@@ -352,7 +352,6 @@ class MainUI(QtWidgets.QMainWindow):
 
     def set_bind(self, newbutton, newkeybind, newkeymode, newkeylayer):
         self.gk_cur.buttons[newbutton].set_button_bind(newkeybind, newkeylayer)
-        self.gk_cur.buttons[newbutton].set_button_mode(newkeymode)
         print("new btn ", str(newbutton), " key", str(newkeybind), " mode", str(newkeymode), " layer", str(newkeylayer))
 
     def set_bind_single(self, newbutton, newkeybind, newkeymode, newkeylayer):

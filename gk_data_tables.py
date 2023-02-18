@@ -283,10 +283,11 @@ gk_hw_righthand = {
 }
 
 gk_hw_keymode = {
-    "KEYB": 1,
-    "GPAD": 2,
-    "BOTH": 3,
-    "LAYER": 4
+    "NONE": 1,
+    "KEYB": 2,
+    "GPAD": 3,
+    "BOTH": 4,
+    "LAYER": 5
 }
 
 gk_hw_commands = {
