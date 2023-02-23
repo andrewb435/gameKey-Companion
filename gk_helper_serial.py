@@ -19,6 +19,8 @@ class GkSerial:
                 self.connection.open()
             except serial.SerialException as e:
                 print(e)
+            except Exception as e:
+                print(e)
 
     def commandsend(self, command_in):
         command_in = command_in + "\n"
@@ -32,6 +34,7 @@ class GkSerial:
                 while self.connection.in_waiting > 0:
                     line.append(self.connection.readline().decode('ascii').rstrip())
                 self.connection.reset_input_buffer()
+                self.connection.close()
                 if line:
                     return line
         else:
