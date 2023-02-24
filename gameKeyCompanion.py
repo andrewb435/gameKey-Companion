@@ -20,7 +20,7 @@
 from gk_ui_main import MainUI
 from PyQt5 import QtWidgets as QtW
 import platform
-version = "2.0.0"
+version = "2.0.1"
 
 if platform.system() == 'Linux':
     print("Linux detected!")
