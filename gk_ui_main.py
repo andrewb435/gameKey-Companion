@@ -314,7 +314,7 @@ class MainUI(QtWidgets.QMainWindow):
 
     def bind_clearall(self):
         self.gk_cur.init_buttons()
-        self.gk_cur.map_button_labels(self)
+        self.gk_cur.map_labels(self)
         self.gk_cur.update_all_labels(self.activeLayer)
 
     def set_config(self):
