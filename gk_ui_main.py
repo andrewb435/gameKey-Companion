@@ -323,6 +323,8 @@ class MainUI(QtWidgets.QMainWindow):
 
     def bind_window(self):
         srcinput = self.sender()
+        if self.gk_cur is None:
+            return
         currentkeybind = self.gk_cur.buttons[srcinput.objectName()].get_button_bind(self.activeLayer)
         currentkeymode = self.gk_cur.buttons[srcinput.objectName()].get_button_mode()
 
@@ -334,6 +336,8 @@ class MainUI(QtWidgets.QMainWindow):
         srcinput = self.sender()
         currentkeybind = 0
         currentkeymode = 0
+        if self.gk_cur is None:
+            return
         if srcinput.objectName() == 'kThumbStickPush':
             currentkeybind = self.gk_cur.buttons[srcinput.objectName()].button_bind_a
             currentkeymode = self.gk_cur.buttons[srcinput.objectName()].get_button_mode()
@@ -358,7 +362,6 @@ class MainUI(QtWidgets.QMainWindow):
         if newbutton == 'kThumbStickPush':
             self.gk_cur.buttons[newbutton].button_bind_a = newkeybind
             self.gk_cur.buttons[newbutton].set_special_button(newkeybind)
-            self.gk_cur.buttons[newbutton].set_button_mode(newkeymode)
             self.ui.kThumbStickPush.setText(gk_helper_converts.map_ard_to_txt(newkeybind))
         elif newbutton == 'kThumbStickUp':
             self.gk_cur.axes[0].key_up = newkeybind
