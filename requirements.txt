@@ -7,3 +7,4 @@ pyserial==3.5
 QtPy==2.3.0
 superqt==0.4.1
 typing_extensions==4.4.0
+pyinstaller==5.13.2
